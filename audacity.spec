@@ -23,7 +23,8 @@ BuildRequires:  libflac++-devel
 BuildRequires:	libogg-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:  libmad-devel
-#BuildRequires:  libid3tag-devel
+BuildRequires:  libid3tag-devel
+BuildRequires:  libjack-devel
 BuildRequires:	libsndfile-devel
 buildrequires: 	zlib-devel
 buildrequires: 	libalsa-devel
