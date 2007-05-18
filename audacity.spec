@@ -1,7 +1,7 @@
 %define name	audacity
-%define version 1.3.2
+%define version 1.3.3
 %define fversion %version
-%define release %mkrel 4
+%define release %mkrel 1
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		%{name}
@@ -16,7 +16,7 @@ Source2:	%{name}_32x32.png
 Source3:	%{name}_64x64.png
 Patch: audacity-src-1.3.0-beta-xdg.patch
 Patch1:		audacity-src-1.3.2-beta-soundtouch-non-x86.patch
-Patch2: audacity-src-1.3.2-beta-flac.patch
+Patch2: audacity-src-1.3.3-beta-flac.patch
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	wxgtku-devel < 2.7
 BuildRequires:  libflac++-devel
@@ -30,7 +30,6 @@ buildrequires: 	libalsa-devel
 BuildRequires: 	autoconf2.5
 BuildRequires: 	ImageMagick
 BuildRequires: 	desktop-file-utils
-BuildRequires: 	recode
 #for compressing the help file:
 BuildRequires:  zip
 Obsoletes:	hackaudacity
@@ -58,7 +57,6 @@ mode and a frequency analysis window for audio analysis applications.
 %patch2 -p1 -b .flac
 chmod 644 *.txt
 ln -s %_libdir/wx/config/`multiarch-platform`/gtk2-unicode-release-2.6 wx-config
-recode Mac-Roman..l1 locale/fr.po
 aclocal
 autoconf
 pushd lib-src/soundtouch
@@ -84,9 +82,6 @@ mkdir -p %buildroot/%_bindir
 %makeinstall BINDIR=%buildroot%_bindir DATADIR=%buildroot%_datadir MANDIR=%buildroot%_mandir
 mv %buildroot%_datadir/locale/zh %buildroot%_datadir/locale/zh_CN
 
-#install help file
-mkdir -p %buildroot/%_datadir/%name
-cp audacity-1.2-help.htb %buildroot/%_datadir/%name
 
 %{find_lang} %{name}
 
