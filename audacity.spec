@@ -36,6 +36,7 @@ BuildRequires:	libsndfile-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	soundtouch-devel >= 1.3.0
 BuildRequires:	speex-devel
+BuildRequires:	portaudio-devel
 #BuildRequires:	twolame-devel
 BuildRequires:	wxgtku-devel < 2.7
 BuildRequires:	wxGTK2.6-devel
