@@ -2,8 +2,8 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version: 	1.3.3
-Release: 	%mkrel 2
+Version: 	1.3.4
+Release: 	%mkrel 1
 License: 	GPL
 Group: 		Sound
 URL: 		http://audacity.sourceforge.net/
@@ -11,11 +11,7 @@ Source0: 	http://prdownloads.sourceforge.net/%{name}/%{name}-src-%{fversion}.tar
 Source1:	%{name}_16x16.png
 Source2:	%{name}_32x32.png
 Source3:	%{name}_64x64.png
-Patch0:		audacity-src-1.3.0-beta-xdg.patch
-Patch1:		audacity-src-1.3.2-beta-soundtouch-non-x86.patch
-Patch2:		audacity-src-1.3.3-beta-flac.patch
 Patch3:		audacity-not_require_lame-libs-devel.patch
-Patch4:		audacity-not_require_lame-libs-devel-generated_part.patch
 Patch5:		audacity-system-libs.patch
 Patch6:		audacity-opt.patch
 Patch7:		audacity-external_portaudio.diff
@@ -27,7 +23,6 @@ BuildRequires: 	ImageMagick
 BuildRequires: 	libalsa-devel
 BuildRequires:  libflac++-devel
 BuildRequires:  libid3tag-devel
-BuildRequires:  libjack-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:  libmad-devel
 BuildRequires:	libogg-devel
@@ -38,8 +33,7 @@ BuildRequires:	soundtouch-devel >= 1.3.0
 BuildRequires:	speex-devel
 BuildRequires:	portaudio-devel
 #BuildRequires:	twolame-devel
-BuildRequires:	wxgtku-devel < 2.7
-BuildRequires:	wxGTK2.6-devel
+BuildRequires:	wxgtku2.8-devel
 BuildRequires: 	zlib-devel
 #for compressing the help file:
 BuildRequires:  zip
@@ -63,17 +57,12 @@ mode and a frequency analysis window for audio analysis applications.
 %prep
 
 %setup -q -n %{name}-src-%{fversion}-beta
-%patch0 -p1 -b .xdg
-%patch1 -p1 -b .ppc
-%patch2 -p1 -b .flac
 %patch3 -p1
-%patch4 -p0
-%patch5 -p1
+%patch5 -p1 -b .system-libs
 %patch6 -p1
 %patch7 -p0
 
 chmod 644 *.txt
-ln -s %{_libdir}/wx/config/`multiarch-platform`/gtk2-unicode-release-2.6 wx-config
 aclocal
 autoconf
 
@@ -88,12 +77,11 @@ export CXXFLAGS="%{optflags}"
     --libdir=%{_libdir} \
     --mandir=%{_mandir} \
     --enable-optimise \
-    --with-wx-version=2.6 \
     --enable-unicode \
     --with-vorbis=system \
     --with-libmad=system \
     --with-libsndfile=system \
-    --with-libresample=system \
+    --with-libresample \
     --with-id3tag=system \
     --with-soundtouch=system \
     --with-portmixer=system \
@@ -108,8 +96,6 @@ rm -rf %{buildroot} %{name}.lang
 mkdir -p %{buildroot}/%{_bindir}
 
 %makeinstall BINDIR=%{buildroot}%{_bindir} DATADIR=%{buildroot}%{_datadir} MANDIR=%{buildroot}%{_mandir}
-
-mv %{buildroot}%{_datadir}/locale/zh %{buildroot}%{_datadir}/locale/zh_CN
 
 
 %find_lang %{name}
