@@ -3,8 +3,8 @@
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
 Version: 	1.3.4
-Release: 	%mkrel 1
-License: 	GPL
+Release: 	%mkrel 2
+License: 	GPLv2+
 Group: 		Sound
 URL: 		http://audacity.sourceforge.net/
 Source0: 	http://prdownloads.sourceforge.net/%{name}/%{name}-src-%{fversion}.tar.bz2
@@ -101,18 +101,10 @@ mkdir -p %{buildroot}/%{_bindir}
 %find_lang %{name}
 
 # Menu
-mkdir -p %{buildroot}/%{_menudir}
-cat > %{buildroot}/%{_menudir}/%{name} <<EOF
-?package(%{name}): command="%{_bindir}/%{name}" needs="X11" \
-icon="%{name}.png" section="Multimedia/Sound" \
-title="Audacity" longtitle="Digital audio waveforms editor" xdg="true"
-EOF
-
 desktop-file-install --vendor="" \
   --remove-category="Application" \
   --remove-category="Multimedia" \
-  --add-category="AudioVideoEditing;Recorder" \
-  --add-category="X-MandrivaLinux-Multimedia-Sound" \
+  --add-category="Audio;AudioVideoEditing;Recorder" \
   --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/*
 
 #icon
@@ -141,7 +133,6 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc LICENSE.txt README.txt
 %{_bindir}/*
-%{_menudir}/%{name}
 %{_iconsdir}/*.png
 %{_liconsdir}/*.png
 %{_miconsdir}/*.png
