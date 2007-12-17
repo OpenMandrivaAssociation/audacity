@@ -42,7 +42,6 @@ Requires(post): shared-mime-info
 Requires(postun): shared-mime-info
 Requires(post):	desktop-file-utils
 Requires(postun):desktop-file-utils
-BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Audacity is a program that lets you manipulate digital audio waveforms.
