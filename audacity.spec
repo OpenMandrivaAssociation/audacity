@@ -3,7 +3,7 @@
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
 Version: 	1.3.4
-Release: 	%mkrel 2
+Release: 	%mkrel 3
 License: 	GPLv2+
 Group: 		Sound
 URL: 		http://audacity.sourceforge.net/
@@ -11,12 +11,12 @@ Source0: 	http://prdownloads.sourceforge.net/%{name}/%{name}-src-%{fversion}.tar
 Source1:	%{name}_16x16.png
 Source2:	%{name}_32x32.png
 Source3:	%{name}_64x64.png
+Patch:		audacity-src-1.3.4-beta-desktopentry.patch
 Patch3:		audacity-not_require_lame-libs-devel.patch
 Patch5:		audacity-system-libs.patch
 Patch6:		audacity-opt.patch
 Patch7:		audacity-external_portaudio.diff
 BuildRequires: 	autoconf2.5
-BuildRequires: 	desktop-file-utils
 BuildRequires:	fftw-devel >= 2.1.4
 BuildRequires:	gettext-devel
 BuildRequires: 	ImageMagick
@@ -57,6 +57,7 @@ mode and a frequency analysis window for audio analysis applications.
 %prep
 
 %setup -q -n %{name}-src-%{fversion}-beta
+%patch -p1 -b .desktopentry
 %patch3 -p1
 %patch5 -p1 -b .system-libs
 %patch6 -p1
@@ -99,13 +100,6 @@ mkdir -p %{buildroot}/%{_bindir}
 
 
 %find_lang %{name}
-
-# Menu
-desktop-file-install --vendor="" \
-  --remove-category="Application" \
-  --remove-category="Multimedia" \
-  --add-category="Audio;AudioVideoEditing;Recorder" \
-  --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/*
 
 #icon
 mkdir -p %{buildroot}/{%{_miconsdir},%{_liconsdir}}
