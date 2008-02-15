@@ -3,7 +3,7 @@
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
 Version: 	1.3.4
-Release: 	%mkrel 3
+Release: 	%mkrel 4
 License: 	GPLv2+
 Group: 		Sound
 URL: 		http://audacity.sourceforge.net/
@@ -11,6 +11,7 @@ Source0: 	http://prdownloads.sourceforge.net/%{name}/%{name}-src-%{fversion}.tar
 Source1:	%{name}_16x16.png
 Source2:	%{name}_32x32.png
 Source3:	%{name}_64x64.png
+Source4:	%{name}.sh
 Patch:		audacity-src-1.3.4-beta-desktopentry.patch
 Patch3:		audacity-not_require_lame-libs-devel.patch
 Patch5:		audacity-system-libs.patch
@@ -109,6 +110,11 @@ cp %{SOURCE3} %{buildroot}%{_liconsdir}/%{name}.png
 
 #clean uneeded installed but not packaged
 rm -rf %{buildroot}%{_docdir}/%{name}
+
+# install pasuspender script for audacity
+mv %{buildroot}/%{_bindir}/audacity %{buildroot}/%{_bindir}/audacity.bin
+install -m755 %{SOURCE4} %{buildroot}/%{_bindir}/audacity
+
 
 %post
 %update_menus
