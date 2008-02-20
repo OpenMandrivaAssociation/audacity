@@ -3,7 +3,7 @@
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
 Version: 	1.3.4
-Release: 	%mkrel 4
+Release: 	%mkrel 5
 License: 	GPLv2+
 Group: 		Sound
 URL: 		http://audacity.sourceforge.net/
@@ -95,10 +95,7 @@ export CXXFLAGS="%{optflags}"
 
 %install
 rm -rf %{buildroot} %{name}.lang
-mkdir -p %{buildroot}/%{_bindir}
-
-%makeinstall BINDIR=%{buildroot}%{_bindir} DATADIR=%{buildroot}%{_datadir} MANDIR=%{buildroot}%{_mandir}
-
+%makeinstall_std
 
 %find_lang %{name}
 
