@@ -3,7 +3,7 @@
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
 Version: 	1.3.4
-Release: 	%mkrel 5
+Release: 	%mkrel 6
 License: 	GPLv2+
 Group: 		Sound
 URL: 		http://audacity.sourceforge.net/
@@ -17,6 +17,7 @@ Patch3:		audacity-not_require_lame-libs-devel.patch
 Patch5:		audacity-system-libs.patch
 Patch6:		audacity-opt.patch
 Patch7:		audacity-external_portaudio.diff
+Patch8:		audacity-1.3.4-CVE-2007-6061.patch
 BuildRequires: 	autoconf2.5
 BuildRequires:	fftw-devel >= 2.1.4
 BuildRequires:	gettext-devel
@@ -63,6 +64,7 @@ mode and a frequency analysis window for audio analysis applications.
 %patch5 -p1 -b .system-libs
 %patch6 -p1
 %patch7 -p0
+%patch8 -p1
 
 chmod 644 *.txt
 aclocal
