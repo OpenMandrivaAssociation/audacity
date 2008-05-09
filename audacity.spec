@@ -2,8 +2,8 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version: 	1.3.4
-Release: 	%mkrel 6
+Version: 	1.3.5
+Release: 	%mkrel 1
 License: 	GPLv2+
 Group: 		Sound
 URL: 		http://audacity.sourceforge.net/
@@ -13,11 +13,9 @@ Source2:	%{name}_32x32.png
 Source3:	%{name}_64x64.png
 Source4:	%{name}.sh
 Patch:		audacity-src-1.3.4-beta-desktopentry.patch
-Patch3:		audacity-not_require_lame-libs-devel.patch
 Patch5:		audacity-system-libs.patch
-Patch6:		audacity-opt.patch
 Patch7:		audacity-external_portaudio.diff
-Patch8:		audacity-1.3.4-CVE-2007-6061.patch
+Patch8:		audacity-1.3.5-CVE-2007-6061.patch
 BuildRequires: 	autoconf2.5
 BuildRequires:	fftw-devel >= 2.1.4
 BuildRequires:	gettext-devel
@@ -39,6 +37,8 @@ BuildRequires:	wxgtku2.8-devel
 BuildRequires: 	zlib-devel
 #for compressing the help file:
 BuildRequires:  zip
+#gw if regenerating configure
+BuildRequires: 	autoconf-archive
 Obsoletes:	hackaudacity
 Requires(post): shared-mime-info
 Requires(postun): shared-mime-info
@@ -60,10 +60,8 @@ mode and a frequency analysis window for audio analysis applications.
 
 %setup -q -n %{name}-src-%{fversion}-beta
 %patch -p1 -b .desktopentry
-%patch3 -p1
 %patch5 -p1 -b .system-libs
-%patch6 -p1
-%patch7 -p0
+%patch7 -p1 -b .portaudio
 %patch8 -p1
 
 chmod 644 *.txt
