@@ -115,15 +115,19 @@ mv %{buildroot}/%{_bindir}/audacity %{buildroot}/%{_bindir}/audacity.bin
 install -m755 %{SOURCE4} %{buildroot}/%{_bindir}/audacity
 
 
+%if %mdkversion < 200900
 %post
 %update_menus
 %update_mime_database
 %update_desktop_database
+%endif
 
+%if %mdkversion < 200900
 %postun
 %clean_menus
 %clean_mime_database
 %clean_desktop_database
+%endif
 
 %clean
 rm -rf %{buildroot}
