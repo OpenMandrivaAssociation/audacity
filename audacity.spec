@@ -3,7 +3,7 @@
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
 Version: 	1.3.5
-Release: 	%mkrel 2
+Release: 	%mkrel 3
 License: 	GPLv2+
 Group: 		Sound
 URL: 		http://audacity.sourceforge.net/
@@ -27,7 +27,7 @@ BuildRequires:  libid3tag-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:  libmad-devel
 BuildRequires:	libogg-devel
-BuildRequires:	resample-devel >= 0.1.3
+BuildRequires:  libsamplerate-devel
 BuildRequires:	libsndfile-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	soundtouch-devel >= 1.3.0
@@ -85,7 +85,7 @@ export CXXFLAGS="%{optflags}"
     --with-vorbis=system \
     --with-libmad=system \
     --with-libsndfile=system \
-    --with-libresample \
+    --with-libsamplerate \
     --with-id3tag=system \
     --with-soundtouch=system \
     --with-portmixer=system \
