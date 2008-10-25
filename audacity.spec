@@ -2,12 +2,12 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version: 	1.3.5
-Release: 	%mkrel 3
+Version: 	1.3.6
+Release: 	%mkrel 1
 License: 	GPLv2+
 Group: 		Sound
 URL: 		http://audacity.sourceforge.net/
-Source0: 	http://prdownloads.sourceforge.net/%{name}/%{name}-src-%{fversion}.tar.bz2
+Source0: 	http://prdownloads.sourceforge.net/%{name}/%{name}-src-%{fversion}.tar.gz
 Source1:	%{name}_16x16.png
 Source2:	%{name}_32x32.png
 Source3:	%{name}_64x64.png
@@ -33,13 +33,15 @@ BuildRequires:	libvorbis-devel
 BuildRequires:	soundtouch-devel >= 1.3.0
 BuildRequires:	speex-devel
 BuildRequires:	portaudio-devel
-#BuildRequires:	twolame-devel
+BuildRequires:	twolame-devel
+BuildRequires:	vamp-plugin-sdk-devel
+BuildRequires:	liblrdf-devel
 BuildRequires:	wxgtku2.8-devel
 BuildRequires: 	zlib-devel
+BuildRequires: 	libffmpeg-devel
+BuildRequires: 	slv2-devel >= 0.6.0-1mdv
 #for compressing the help file:
 BuildRequires:  zip
-#gw if regenerating configure
-BuildRequires: 	autoconf-archive
 Obsoletes:	hackaudacity
 Requires(post): shared-mime-info
 Requires(postun): shared-mime-info
@@ -59,7 +61,7 @@ mode and a frequency analysis window for audio analysis applications.
 
 %prep
 
-%setup -q -n %{name}-src-%{fversion}-beta
+%setup -q -n %{name}-src-%{fversion}
 %patch -p1 -b .desktopentry
 %patch5 -p1 -b .system-libs
 %patch7 -p1 -b .portaudio
@@ -67,7 +69,7 @@ mode and a frequency analysis window for audio analysis applications.
 %patch9 -p1 -b .gcc43
 
 chmod 644 *.txt
-aclocal
+aclocal -I m4
 autoconf
 
 %build
@@ -89,9 +91,8 @@ export CXXFLAGS="%{optflags}"
     --with-id3tag=system \
     --with-soundtouch=system \
     --with-portmixer=system \
-    --with-portaudio=system
-
-#    --with-libtwolame=system \
+    --with-portaudio=system \
+    --with-libtwolame=system \
 
 %make
 
