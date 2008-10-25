@@ -48,6 +48,8 @@ Requires(post): shared-mime-info
 Requires(postun): shared-mime-info
 Requires(post):	desktop-file-utils
 Requires(postun):desktop-file-utils
+Suggests: libffmpeg
+Suggests: %mklibname lame 0
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
