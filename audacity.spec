@@ -40,6 +40,7 @@ BuildRequires:	wxgtku2.8-devel
 BuildRequires: 	zlib-devel
 BuildRequires: 	libffmpeg-devel
 BuildRequires: 	slv2-devel >= 0.6.0-1mdv
+BuildRequires: 	libexpat-devel
 #for compressing the help file:
 BuildRequires:  zip
 Obsoletes:	hackaudacity
@@ -93,7 +94,7 @@ export CXXFLAGS="%{optflags}"
     --with-portmixer=system \
     --with-portaudio=system \
     --with-libtwolame=system \
-
+    --with-ffmpeg
 %make
 
 %install
