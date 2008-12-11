@@ -20,7 +20,7 @@ Patch9:		audacity-1.3.4-gcc43.patch
 BuildRequires: 	autoconf2.5
 BuildRequires:	fftw-devel >= 2.1.4
 BuildRequires:	gettext-devel
-BuildRequires: 	ImageMagick
+BuildRequires: 	imagemagick
 BuildRequires: 	libalsa-devel
 BuildRequires:  libflac++-devel
 BuildRequires:  libid3tag-devel
