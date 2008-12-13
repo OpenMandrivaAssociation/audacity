@@ -11,11 +11,10 @@ Source0: 	http://prdownloads.sourceforge.net/%{name}/%{name}-src-%{fversion}.tar
 Source1:	%{name}_16x16.png
 Source2:	%{name}_32x32.png
 Source3:	%{name}_64x64.png
-Patch:		audacity-src-1.3.4-beta-desktopentry.patch
+Patch:		audacity-1.3.6-desktopentry.patch
 Patch5:		audacity-system-libs.patch
 Patch7:		audacity-external_portaudio.diff
 Patch8:		audacity-1.3.5-CVE-2007-6061.patch
-Patch9:		audacity-1.3.4-gcc43.patch
 BuildRequires: 	autoconf2.5
 BuildRequires:	fftw-devel >= 2.1.4
 BuildRequires:	gettext-devel
@@ -68,7 +67,6 @@ mode and a frequency analysis window for audio analysis applications.
 %patch5 -p1 -b .system-libs
 %patch7 -p1 -b .portaudio
 %patch8 -p1
-%patch9 -p1 -b .gcc43
 
 chmod 644 *.txt
 aclocal -I m4
