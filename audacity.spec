@@ -3,7 +3,7 @@
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
 Version: 	1.3.7
-Release: 	%mkrel 4
+Release: 	%mkrel 5
 License: 	GPLv2+
 Group: 		Sound
 URL: 		http://audacity.sourceforge.net/
@@ -21,6 +21,8 @@ Patch3:		audacity-1.3.7-vamp-1.3.patch
 #gw from Fedora, fix crash in Effect->Repeat
 Patch4:		audacity-1.3.7-repeat.patch
 Patch5:		audacity-system-libs.patch
+#gw use Alsa by default
+Patch6:		audacity-src-1.3.7-alsa-by-default.patch
 Patch7:		audacity-external_portaudio.diff
 Patch8:		audacity-1.3.5-CVE-2007-6061.patch
 Patch9:		portaudio-19-alsa_pulse.patch
@@ -85,6 +87,7 @@ mode and a frequency analysis window for audio analysis applications.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1 -b .system-libs
+%patch6 -p1
 %patch7 -p1 -b .portaudio
 %patch8 -p1
 cd lib-src/portaudio-v19/
