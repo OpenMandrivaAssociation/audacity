@@ -2,34 +2,29 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version: 	1.3.7
-Release: 	%mkrel 5
+Version: 	1.3.8
+Release: 	%mkrel 1
 License: 	GPLv2+
 Group: 		Sound
 URL: 		http://audacity.sourceforge.net/
-Source0: 	http://prdownloads.sourceforge.net/%{name}/%{name}-minsrc-%{fversion}.tar.bz2
+Source0: 	http://audacity.googlecode.com/files/%{name}-minsrc-%{fversion}.tar.bz2
 Source1:	%{name}_16x16.png
 Source2:	%{name}_32x32.png
 Source3:	%{name}_64x64.png
-Patch:		audacity-1.3.6-desktopentry.patch
-Patch1:		audacity-src-1.3.7-format-strings.patch
-#gw from Fedora, use the right default audio device if using Pulseaudio
-Patch2:		audacity-1.3.7-audiodevdefaults.patch
+Patch:		audacity-1.3.8-desktopentry.patch
 #gw rediffed from Fedora, build with vamp 1.1 
 #drop once vamp was updated to 2.0
 Patch3:		audacity-1.3.7-vamp-1.3.patch
-#gw from Fedora, fix crash in Effect->Repeat
-Patch4:		audacity-1.3.7-repeat.patch
 Patch5:		audacity-system-libs.patch
 #gw use Alsa by default
-Patch6:		audacity-src-1.3.7-alsa-by-default.patch
-Patch7:		audacity-external_portaudio.diff
+Patch6:		audacity-1.3.8-alsa-by-default.patch
 Patch8:		audacity-1.3.5-CVE-2007-6061.patch
-Patch9:		portaudio-19-alsa_pulse.patch
 Patch10:	audacity-1.3.7-CVE-2009-0490.diff
-#gw make preferences window resizable
-#https://qa.mandriva.com/show_bug.cgi?id=49244
-Patch11:	audacity-src-1.3.7-resizable-preferences.patch
+#gw build with soundtouch 1.4
+Patch12:	audacity-1.3.8-soundtouch-check.patch
+#gw the gtk headers pull in the clashing gio stuff, only include needed parts
+# of glib
+Patch13:	audacity-src-1.3.8-glib-includes.patch
 BuildRequires: 	autoconf2.5
 BuildRequires:	fftw-devel >= 2.1.4
 BuildRequires:	gettext-devel
@@ -44,12 +39,10 @@ BuildRequires:	libogg-devel
 BuildRequires:  libsamplerate-devel
 BuildRequires:	libsndfile-devel
 BuildRequires:	libvorbis-devel
-BuildRequires:	soundtouch-devel >= 1.3.0
+BuildRequires:	soundtouch-devel >= 1.4.0
 BuildRequires:	speex-devel
-#gw 1.3.7 doesn't build with our portaudio lib
-#BuildRequires:	portaudio-devel
 BuildRequires:	twolame-devel
-BuildRequires:	wxgtku2.8-devel
+BuildRequires:	wxgtku2.8-devel >= 2.8.10
 BuildRequires: 	zlib-devel
 BuildRequires: 	libffmpeg-devel
 BuildRequires:	vamp-plugin-sdk-devel
@@ -82,19 +75,13 @@ mode and a frequency analysis window for audio analysis applications.
 
 %setup -q -n %{name}-src-%{fversion}
 %patch -p1 -b .desktopentry
-%patch1 -p1
-%patch2 -p1
 %patch3 -p1
-%patch4 -p1
 %patch5 -p1 -b .system-libs
-%patch6 -p1
-%patch7 -p1 -b .portaudio
+%patch6 -p1 -b .alsa-by-default
 %patch8 -p1
-cd lib-src/portaudio-v19/
-%patch9 -p1
-cd ../..
 %patch10 -p0 -b .CVE-2009-0490
-%patch11 -p1
+%patch12 -p1
+%patch13 -p1
 
 chmod 644 *.txt
 aclocal -I m4
