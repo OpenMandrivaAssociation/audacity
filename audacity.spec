@@ -86,6 +86,10 @@ mode and a frequency analysis window for audio analysis applications.
 chmod 644 *.txt
 aclocal -I m4
 autoconf
+cd lib-src/taglib
+aclocal
+autoconf
+automake
 
 %build
 export PATH=$PATH:`pwd`
