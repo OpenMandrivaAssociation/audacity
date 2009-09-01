@@ -2,7 +2,7 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version: 	1.3.8
+Version: 	1.3.9
 Release: 	%mkrel 1
 License: 	GPLv2+
 Group: 		Sound
@@ -129,6 +129,9 @@ cp %{SOURCE3} %{buildroot}%{_liconsdir}/%{name}.png
 
 #clean uneeded installed but not packaged
 rm -rf %{buildroot}%{_docdir}/%{name}
+
+#gw work around bug #52526
+mkdir -p %buildroot%_datadir/%name/help/manual
 
 %if %mdkversion < 200900
 %post
