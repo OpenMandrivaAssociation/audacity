@@ -3,7 +3,7 @@
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
 Version: 	1.3.9
-Release: 	%mkrel 1
+Release: 	%mkrel 2
 License: 	GPLv2+
 Group: 		Sound
 URL: 		http://audacity.sourceforge.net/
@@ -25,6 +25,9 @@ Patch12:	audacity-1.3.8-soundtouch-check.patch
 #gw the gtk headers pull in the clashing gio stuff, only include needed parts
 # of glib
 Patch13:	audacity-src-1.3.8-glib-includes.patch
+#gw from CVS, fix crash in preferences
+#https://qa.mandriva.com/show_bug.cgi?id=54752
+Patch14:	audacity-prefs.patch
 BuildRequires: 	autoconf2.5
 BuildRequires:	fftw-devel >= 2.1.4
 BuildRequires:	gettext-devel
@@ -82,6 +85,9 @@ mode and a frequency analysis window for audio analysis applications.
 %patch10 -p0 -b .CVE-2009-0490
 %patch12 -p1
 %patch13 -p1
+cd src/prefs
+%patch14 -p0
+cd ../..
 
 chmod 644 *.txt
 aclocal -I m4
