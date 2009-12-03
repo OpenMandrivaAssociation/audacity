@@ -2,8 +2,8 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version: 	1.3.9
-Release: 	%mkrel 2
+Version: 	1.3.10
+Release: 	%mkrel 1
 License: 	GPLv2+
 Group: 		Sound
 URL: 		http://audacity.sourceforge.net/
@@ -20,14 +20,6 @@ Patch5:		audacity-system-libs.patch
 Patch6:		audacity-1.3.8-alsa-by-default.patch
 Patch8:		audacity-1.3.5-CVE-2007-6061.patch
 Patch10:	audacity-1.3.7-CVE-2009-0490.diff
-#gw build with soundtouch 1.4
-Patch12:	audacity-1.3.8-soundtouch-check.patch
-#gw the gtk headers pull in the clashing gio stuff, only include needed parts
-# of glib
-Patch13:	audacity-src-1.3.8-glib-includes.patch
-#gw from CVS, fix crash in preferences
-#https://qa.mandriva.com/show_bug.cgi?id=54752
-Patch14:	audacity-prefs.patch
 BuildRequires: 	autoconf2.5
 BuildRequires:	fftw-devel >= 2.1.4
 BuildRequires:	gettext-devel
@@ -83,11 +75,6 @@ mode and a frequency analysis window for audio analysis applications.
 %patch6 -p1 -b .alsa-by-default
 %patch8 -p1
 %patch10 -p0 -b .CVE-2009-0490
-%patch12 -p1
-%patch13 -p1
-cd src/prefs
-%patch14 -p0
-cd ../..
 
 chmod 644 *.txt
 aclocal -I m4
@@ -167,3 +154,4 @@ rm -rf %{buildroot}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/mime/packages/audacity.xml
 %{_mandir}/man1/audacity.1*
+%_datadir/pixmaps/%name.xpm
