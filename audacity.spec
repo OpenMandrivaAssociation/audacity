@@ -34,7 +34,7 @@ BuildRequires:	libogg-devel
 BuildRequires:  libsamplerate-devel
 BuildRequires:	libsndfile-devel
 BuildRequires:	libvorbis-devel
-BuildRequires:	soundtouch-devel >= 1.4.0
+BuildRequires:	soundtouch-devel >= 1.3.0
 BuildRequires:	speex-devel
 BuildRequires:	twolame-devel
 BuildRequires:	wxgtku2.8-devel >= 2.8.10
