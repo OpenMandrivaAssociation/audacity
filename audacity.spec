@@ -3,7 +3,7 @@
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
 Version: 	1.3.10
-Release: 	%mkrel 1
+Release: 	%mkrel 2
 License: 	GPLv2+
 Group: 		Sound
 URL: 		http://audacity.sourceforge.net/
@@ -12,9 +12,6 @@ Source1:	%{name}_16x16.png
 Source2:	%{name}_32x32.png
 Source3:	%{name}_64x64.png
 Patch:		audacity-1.3.8-desktopentry.patch
-#gw rediffed from Fedora, build with vamp 1.1 
-#drop once vamp was updated to 2.0
-Patch3:		audacity-1.3.7-vamp-1.3.patch
 Patch5:		audacity-system-libs.patch
 #gw use Alsa by default
 Patch6:		audacity-1.3.8-alsa-by-default.patch
@@ -70,7 +67,6 @@ mode and a frequency analysis window for audio analysis applications.
 
 %setup -q -n %{name}-src-%{fversion}
 %patch -p1 -b .desktopentry
-%patch3 -p1
 %patch5 -p1 -b .system-libs
 %patch6 -p1 -b .alsa-by-default
 %patch8 -p1
