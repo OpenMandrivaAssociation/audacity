@@ -2,8 +2,8 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version: 	1.3.10
-Release: 	%mkrel 2
+Version: 	1.3.11
+Release: 	%mkrel 1
 License: 	GPLv2+
 Group: 		Sound
 URL: 		http://audacity.sourceforge.net/
@@ -65,7 +65,7 @@ mode and a frequency analysis window for audio analysis applications.
 
 %prep
 
-%setup -q -n %{name}-src-%{fversion}
+%setup -q -n %{name}-src-%{fversion}-beta
 %patch -p1 -b .desktopentry
 %patch5 -p1 -b .system-libs
 %patch6 -p1 -b .alsa-by-default
