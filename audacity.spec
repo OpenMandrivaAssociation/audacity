@@ -2,15 +2,12 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version: 	1.3.11
+Version: 	1.3.12
 Release: 	%mkrel 1
 License: 	GPLv2+
 Group: 		Sound
 URL: 		http://audacity.sourceforge.net/
-Source0: 	http://audacity.googlecode.com/files/%{name}-minsrc-%{fversion}.tar.bz2
-Source1:	%{name}_16x16.png
-Source2:	%{name}_32x32.png
-Source3:	%{name}_64x64.png
+Source0: 	http://audacity.googlecode.com/files/%{name}-minsrc-%{fversion}-beta.tar.bz2
 Patch:		audacity-1.3.8-desktopentry.patch
 Patch5:		audacity-system-libs.patch
 #gw use Alsa by default
@@ -75,10 +72,6 @@ mode and a frequency analysis window for audio analysis applications.
 chmod 644 *.txt
 aclocal -I m4
 autoconf
-cd lib-src/taglib
-aclocal
-autoconf
-automake
 
 %build
 export PATH=$PATH:`pwd`
@@ -110,12 +103,6 @@ rm -rf %{buildroot} %{name}.lang
 
 %find_lang %{name}
 
-#icon
-mkdir -p %{buildroot}/{%{_miconsdir},%{_liconsdir}}
-convert -transparent white %{SOURCE1} %{buildroot}%{_miconsdir}/%{name}.png
-convert -transparent white %{SOURCE2} %{buildroot}%{_iconsdir}/%{name}.png
-cp %{SOURCE3} %{buildroot}%{_liconsdir}/%{name}.png
-
 #clean uneeded installed but not packaged
 rm -rf %{buildroot}%{_docdir}/%{name}
 
@@ -143,11 +130,10 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc LICENSE.txt README.txt
 %{_bindir}/*
-%{_iconsdir}/*.png
-%{_liconsdir}/*.png
-%{_miconsdir}/*.png
 %{_datadir}/audacity
 %{_datadir}/applications/%{name}.desktop
+%_datadir/icons/hicolor/*/apps/audacity.*
+%_datadir/pixmaps/*
 %{_datadir}/mime/packages/audacity.xml
 %{_mandir}/man1/audacity.1*
 %_datadir/pixmaps/%name.xpm
