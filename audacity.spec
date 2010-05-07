@@ -3,12 +3,15 @@
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
 Version: 	1.3.12
-Release: 	%mkrel 1
+Release: 	%mkrel 2
 License: 	GPLv2+
 Group: 		Sound
 URL: 		http://audacity.sourceforge.net/
 Source0: 	http://audacity.googlecode.com/files/%{name}-minsrc-%{fversion}-beta.tar.bz2
 Patch:		audacity-1.3.8-desktopentry.patch
+#gw fix for ffmpeg api change
+#https://qa.mandriva.com/show_bug.cgi?id=59129
+Patch1:		audacity-src-1.3.12-beta-avformat-api-change.patch
 Patch5:		audacity-system-libs.patch
 #gw use Alsa by default
 Patch6:		audacity-1.3.8-alsa-by-default.patch
@@ -64,6 +67,7 @@ mode and a frequency analysis window for audio analysis applications.
 
 %setup -q -n %{name}-src-%{fversion}-beta
 %patch -p1 -b .desktopentry
+%patch1 -p1
 %patch5 -p1 -b .system-libs
 %patch6 -p1 -b .alsa-by-default
 %patch8 -p1
