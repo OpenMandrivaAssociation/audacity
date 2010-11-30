@@ -17,6 +17,7 @@ Patch5:		audacity-system-libs.patch
 Patch6:		audacity-1.3.8-alsa-by-default.patch
 Patch8:		audacity-1.3.5-CVE-2007-6061.patch
 Patch10:	audacity-1.3.7-CVE-2009-0490.diff
+Patch11:	audacity-antibork.diff
 BuildRequires: 	autoconf2.5
 BuildRequires:	fftw-devel >= 2.1.4
 BuildRequires:	gettext-devel
@@ -72,6 +73,11 @@ mode and a frequency analysis window for audio analysis applications.
 %patch6 -p1 -b .alsa-by-default
 %patch8 -p1
 %patch10 -p0 -b .CVE-2009-0490
+%patch11 -p0
+
+pushd lib-src/portmixer
+    rm -f configure; autoconf
+popd
 
 chmod 644 *.txt
 aclocal -I m4
