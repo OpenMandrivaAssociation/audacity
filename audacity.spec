@@ -2,22 +2,18 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version: 	1.3.12
-Release: 	%mkrel 4
+Version: 	1.3.13
+Release: 	%mkrel 1
 License: 	GPLv2+
 Group: 		Sound
 URL: 		http://audacity.sourceforge.net/
 Source0: 	http://audacity.googlecode.com/files/%{name}-minsrc-%{fversion}-beta.tar.bz2
-Patch:		audacity-1.3.8-desktopentry.patch
-#gw fix for ffmpeg api change
-#https://qa.mandriva.com/show_bug.cgi?id=59129
-Patch1:		audacity-src-1.3.12-beta-avformat-api-change.patch
+Patch:		audacity-1.3.13-desktopentry.patch
 Patch5:		audacity-system-libs.patch
 #gw use Alsa by default
 Patch6:		audacity-1.3.8-alsa-by-default.patch
 Patch8:		audacity-1.3.5-CVE-2007-6061.patch
 Patch10:	audacity-1.3.7-CVE-2009-0490.diff
-Patch11:	audacity-antibork.diff
 BuildRequires: 	autoconf2.5
 BuildRequires:	fftw-devel >= 2.1.4
 BuildRequires:	gettext-devel
@@ -68,16 +64,10 @@ mode and a frequency analysis window for audio analysis applications.
 
 %setup -q -n %{name}-src-%{fversion}-beta
 %patch -p1 -b .desktopentry
-%patch1 -p1
 %patch5 -p1 -b .system-libs
 %patch6 -p1 -b .alsa-by-default
 %patch8 -p1
 %patch10 -p0 -b .CVE-2009-0490
-%patch11 -p0
-
-pushd lib-src/portmixer
-    rm -f configure; autoconf
-popd
 
 chmod 644 *.txt
 aclocal -I m4
@@ -102,7 +92,7 @@ export CXXFLAGS="%{optflags}"
     --with-id3tag=system \
     --with-soundtouch=system \
     --with-portmixer \
-    --with-portaudio=v19 \
+    --with-portaudio \
     --with-libtwolame=system \
     --with-ffmpeg
 %make
