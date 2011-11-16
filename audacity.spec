@@ -9,6 +9,7 @@ Group: 		Sound
 URL: 		http://audacity.sourceforge.net/
 Source0: 	http://audacity.googlecode.com/files/%{name}-minsrc-%{fversion}-beta.tar.bz2
 Patch:		audacity-1.3.13-desktopentry.patch
+Patch1:         audacity-fix-glib-includes.patch
 Patch5:		audacity-system-libs.patch
 #gw use Alsa by default
 Patch6:		audacity-1.3.8-alsa-by-default.patch
@@ -64,6 +65,9 @@ mode and a frequency analysis window for audio analysis applications.
 
 %setup -q -n %{name}-src-%{fversion}-beta
 %patch -p1 -b .desktopentry
+%if %mdvver >= 201200
+%patch1 -p1
+%endif
 %patch5 -p1 -b .system-libs
 %patch6 -p1 -b .alsa-by-default
 %patch8 -p1
