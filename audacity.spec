@@ -66,7 +66,7 @@ mode and a frequency analysis window for audio analysis applications.
 %setup -q -n %{name}-src-%{fversion}-beta
 %patch -p1 -b .desktopentry
 %if %mdvver >= 201200
-%patch1 -p1
+%patch1 -p1 -b .glib
 %endif
 %patch5 -p1 -b .system-libs
 %patch6 -p1 -b .alsa-by-default
