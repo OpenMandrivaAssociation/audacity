@@ -21,7 +21,7 @@ BuildRequires:	gettext-devel
 BuildRequires: 	imagemagick
 BuildRequires: 	libalsa-devel
 BuildRequires:  libflac++-devel
-BuildRequires:  libjack-devel
+BuildRequires:  jackit-devel
 BuildRequires:  libid3tag-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:  libmad-devel
