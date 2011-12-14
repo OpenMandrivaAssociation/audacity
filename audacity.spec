@@ -2,8 +2,8 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version: 	1.3.13
-Release: 	%mkrel 2
+Version: 	1.3.14
+Release: 	%mkrel 1
 License: 	GPLv2+
 Group: 		Sound
 URL: 		http://audacity.sourceforge.net/
@@ -13,7 +13,7 @@ Patch1:         audacity-fix-glib-includes.patch
 Patch5:		audacity-system-libs.patch
 #gw use Alsa by default
 Patch6:		audacity-1.3.8-alsa-by-default.patch
-Patch8:		audacity-1.3.5-CVE-2007-6061.patch
+Patch8:		audacity-1.3.14-CVE-2007-6061.patch
 Patch10:	audacity-1.3.7-CVE-2009-0490.diff
 BuildRequires: 	autoconf2.5
 BuildRequires:	fftw-devel >= 2.1.4
