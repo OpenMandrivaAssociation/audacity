@@ -2,12 +2,12 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version: 	1.3.14
+Version: 	2.0.0
 Release: 	%mkrel 1
 License: 	GPLv2+
 Group: 		Sound
 URL: 		http://audacity.sourceforge.net/
-Source0: 	http://audacity.googlecode.com/files/%{name}-minsrc-%{fversion}-beta.tar.bz2
+Source0: 	http://audacity.googlecode.com/files/%{name}-minsrc-%{fversion}.tar.bz2
 Patch:		audacity-1.3.13-desktopentry.patch
 Patch1:         audacity-fix-glib-includes.patch
 Patch5:		audacity-system-libs.patch
@@ -34,11 +34,7 @@ BuildRequires:	speex-devel
 BuildRequires:	twolame-devel
 BuildRequires:	wxgtku2.8-devel >= 2.8.10
 BuildRequires: 	zlib-devel
-%if %mdvver >= 201200
-BuildRequires: 	ffmpeg0.7-devel
-%else
-BuildRequires: 	libffmpeg-devel
-%endif
+BuildRequires: 	ffmpeg-devel
 BuildRequires:	vamp-plugin-sdk-devel
 #gw these are not supported in 1.3.7
 #BuildRequires:	liblrdf-devel
@@ -67,7 +63,7 @@ mode and a frequency analysis window for audio analysis applications.
 
 %prep
 
-%setup -q -n %{name}-src-%{fversion}-beta
+%setup -q -n %{name}-src-%{fversion}
 %patch -p1 -b .desktopentry
 %if %mdvver >= 201200
 %patch1 -p1 -b .glib
