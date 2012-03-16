@@ -8,7 +8,7 @@ License: 	GPLv2+
 Group: 		Sound
 URL: 		http://audacity.sourceforge.net/
 Source0: 	http://audacity.googlecode.com/files/%{name}-minsrc-%{fversion}.tar.bz2
-Patch:		audacity-1.3.13-desktopentry.patch
+Patch0:		audacity-1.3.13-desktopentry.patch
 Patch5:		audacity-system-libs.patch
 #gw use Alsa by default
 Patch6:		audacity-1.3.8-alsa-by-default.patch
