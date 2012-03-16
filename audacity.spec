@@ -138,4 +138,4 @@ rm -rf %{buildroot}
 %_datadir/pixmaps/*
 %{_datadir}/mime/packages/audacity.xml
 %{_mandir}/man1/audacity.1*
-%_datadir/pixmaps/%name.xpm
+
