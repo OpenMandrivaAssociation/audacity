@@ -27,7 +27,7 @@ BuildRequires:	libjpeg-devel
 BuildRequires:  libmad-devel
 BuildRequires:	libogg-devel
 BuildRequires:  libsamplerate-devel
-BuildRequires:	libsndfile-devel
+BuildRequires:	sndfile-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	soundtouch-devel >= 1.3.0
 BuildRequires:	speex-devel
