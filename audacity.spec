@@ -8,7 +8,6 @@ License: 	GPLv2+
 Group: 		Sound
 URL: 		http://audacity.sourceforge.net/
 Source0: 	http://audacity.googlecode.com/files/%{name}-minsrc-%{fversion}.tar.bz2
-Patch0:		audacity-1.3.13-desktopentry.patch
 Patch5:		audacity-system-libs.patch
 #gw use Alsa by default
 Patch6:		audacity-1.3.8-alsa-by-default.patch
@@ -40,6 +39,7 @@ BuildRequires:	vamp-plugin-sdk-devel
 #BuildRequires:	liblrdf-devel
 #BuildRequires: 	slv2-devel >= 0.6.0-1mdv
 BuildRequires: 	libexpat-devel
+BuildRequires: 	desktop-file-utils
 #for compressing the help file:
 BuildRequires:  zip
 Obsoletes:	hackaudacity
@@ -64,7 +64,6 @@ mode and a frequency analysis window for audio analysis applications.
 %prep
 
 %setup -q -n %{name}-src-%{fversion}
-%patch0 -p1 -b .desktopentry
 %patch5 -p1 -b .system-libs
 %patch6 -p1 -b .alsa-by-default
 %patch8 -p1
@@ -111,19 +110,11 @@ rm -rf %{buildroot}%{_docdir}/%{name}
 #gw work around bug #52526
 mkdir -p %buildroot%_datadir/%name/help/manual
 
-%if %mdkversion < 200900
-%post
-%update_menus
-%update_mime_database
-%update_desktop_database
-%endif
-
-%if %mdkversion < 200900
-%postun
-%clean_menus
-%clean_mime_database
-%clean_desktop_database
-%endif
+desktop-file-install \
+        --add-category="GTK" \
+        --add-category="X-MandrivaLinux-CrossDesktop" \
+        --dir %{buildroot}%{_datadir}/applications \
+        %{buildroot}%{_datadir}/applications/*
 
 %clean
 rm -rf %{buildroot}
