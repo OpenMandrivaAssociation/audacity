@@ -33,7 +33,11 @@ BuildRequires:	speex-devel
 BuildRequires:	twolame-devel
 BuildRequires:	wxgtku2.8-devel >= 2.8.10
 BuildRequires: 	zlib-devel
+%if %mdvver >= 201200
+BuildRequires:  ffmpeg0.7-devel
+%else
 BuildRequires: 	ffmpeg-devel
+%endif
 BuildRequires:	vamp-plugin-sdk-devel
 #gw these are not supported in 1.3.7
 #BuildRequires:	liblrdf-devel
