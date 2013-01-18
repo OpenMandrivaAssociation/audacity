@@ -42,7 +42,7 @@ BuildRequires:	vamp-plugin-sdk-devel
 #gw these are not supported in 1.3.7
 #BuildRequires:	liblrdf-devel
 #BuildRequires: 	slv2-devel >= 0.6.0-1mdv
-BuildRequires: 	libexpat-devel
+BuildRequires: 	expat-devel
 BuildRequires: 	desktop-file-utils
 #for compressing the help file:
 BuildRequires:  zip
