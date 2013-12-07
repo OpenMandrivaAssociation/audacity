@@ -3,7 +3,7 @@
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
 Version:	2.0.4
-Release:	4
+Release:	5
 License:	GPLv2+
 Group:		Sound
 URL:		http://audacity.sourceforge.net/
