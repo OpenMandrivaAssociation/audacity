@@ -2,12 +2,12 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version:	2.0.4
-Release:	5
+Version:	2.0.5
+Release:	1
 License:	GPLv2+
 Group:		Sound
 URL:		http://audacity.sourceforge.net/
-Source0:	http://audacity.googlecode.com/files/%{name}-minsrc-%{fversion}.tar.xz
+Source0:	http://audacity.googlecode.com/files/audacity-minsrc-%{version}.tar.xz
 Patch5:		audacity-system-libs.patch
 #gw use Alsa by default
 Patch6:		audacity-1.3.8-alsa-by-default.patch
@@ -112,5 +112,6 @@ desktop-file-install \
 %{_datadir}/pixmaps/*
 %{_datadir}/mime/packages/audacity.xml
 %{_mandir}/man1/audacity.1*
+
 
 
