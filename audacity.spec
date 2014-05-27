@@ -8,11 +8,11 @@ License:	GPLv2+
 Group:		Sound
 URL:		http://audacity.sourceforge.net/
 Source0:	http://audacity.googlecode.com/files/audacity-minsrc-%{version}.tar.xz
-Patch5:		audacity-system-libs.patch
+#Patch5:		audacity-system-libs.patch
 #gw use Alsa by default
-Patch6:		audacity-1.3.8-alsa-by-default.patch
-Patch8:		audacity-1.3.14-CVE-2007-6061.patch
-Patch10:	audacity-1.3.7-CVE-2009-0490.diff
+#Patch6:		audacity-1.3.8-alsa-by-default.patch
+#Patch8:		audacity-1.3.14-CVE-2007-6061.patch
+#Patch10:	audacity-1.3.7-CVE-2009-0490.diff
 Patch11:	audacity-2.0.0-fix-linking.patch
 BuildRequires:	autoconf2.5
 BuildRequires:	desktop-file-utils
@@ -52,10 +52,10 @@ mode and a frequency analysis window for audio analysis applications.
 
 %prep
 %setup -q -n %{name}-src-%{fversion}
-%patch5 -p1 -b .system-libs
-%patch6 -p1 -b .alsa-by-default
-%patch8 -p1
-%patch10 -p0 -b .CVE-2009-0490
+#%patch5 -p1 -b .system-libs
+#%patch6 -p1 -b .alsa-by-default
+#%patch8 -p1
+#%patch10 -p0 -b .CVE-2009-0490
 %patch11 -p1 -b .linking
 
 chmod 644 *.txt
