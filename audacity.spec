@@ -13,7 +13,7 @@ Source0:	http://audacity.googlecode.com/files/audacity-minsrc-%{version}.tar.xz
 #Patch6:		audacity-1.3.8-alsa-by-default.patch
 #Patch8:		audacity-1.3.14-CVE-2007-6061.patch
 #Patch10:	audacity-1.3.7-CVE-2009-0490.diff
-#Patch11:	audacity-2.0.0-fix-linking.patch
+Patch11:	audacity-2.0.0-fix-linking.patch
 BuildRequires:	autoconf2.5
 BuildRequires:	desktop-file-utils
 BuildRequires:	imagemagick
@@ -56,7 +56,7 @@ mode and a frequency analysis window for audio analysis applications.
 #%patch6 -p1 -b .alsa-by-default
 #%patch8 -p1
 #%patch10 -p0 -b .CVE-2009-0490
-#%patch11 -p1 -b .linking
+%patch11 -p1 -b .linking
 
 chmod 644 *.txt
 aclocal -I m4
