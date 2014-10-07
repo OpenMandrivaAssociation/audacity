@@ -2,24 +2,19 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version:	2.0.5
-Release:	3
+Version:	2.0.6
+Release:	1
 License:	GPLv2+
 Group:		Sound
 URL:		http://audacity.sourceforge.net/
-Source0:	http://audacity.googlecode.com/files/audacity-minsrc-%{version}.tar.xz
-#Patch5:		audacity-system-libs.patch
-#gw use Alsa by default
-#Patch6:		audacity-1.3.8-alsa-by-default.patch
-#Patch8:		audacity-1.3.14-CVE-2007-6061.patch
-#Patch10:	audacity-1.3.7-CVE-2009-0490.diff
-Patch11:	audacity-2.0.0-fix-linking.patch
+Source0:	http://optimate.dl.sourceforge.net/project/audacity/audacity/%{version}/audacity-minsrc-%{version}.tar.xz
+Patch1:		audacity-ffmpeg.patch
 BuildRequires:	autoconf2.5
 BuildRequires:	desktop-file-utils
 BuildRequires:	imagemagick
 #for compressing the help file:
 BuildRequires:	zip
-BuildRequires:	ffmpeg0.7-devel
+BuildRequires:	ffmpeg-devel
 BuildRequires:	gettext-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	wxgtku2.8-devel >= 2.8.10
@@ -52,15 +47,8 @@ mode and a frequency analysis window for audio analysis applications.
 
 %prep
 %setup -q -n %{name}-src-%{fversion}
-#%patch5 -p1 -b .system-libs
-#%patch6 -p1 -b .alsa-by-default
-#%patch8 -p1
-#%patch10 -p0 -b .CVE-2009-0490
-%patch11 -p1 -b .linking
-
+%apply_patches
 chmod 644 *.txt
-aclocal -I m4
-autoconf
 
 %build
 export PATH=$PATH:`pwd`
@@ -110,6 +98,7 @@ desktop-file-install \
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/audacity.*
 %{_datadir}/pixmaps/*
+%{_datadir}/appdata/audacity.appdata.xml
 %{_datadir}/mime/packages/audacity.xml
 %{_mandir}/man1/audacity.1*
 
