@@ -8,7 +8,7 @@ License:	GPLv2+
 Group:		Sound
 URL:		http://audacity.sourceforge.net/
 Source0:	http://optimate.dl.sourceforge.net/project/audacity/audacity/%{version}/audacity-minsrc-%{version}.tar.xz
-Patch1:		audacity-ffmpeg.patch
+#Patch1:		audacity-ffmpeg.patch
 BuildRequires:	autoconf2.5
 BuildRequires:	desktop-file-utils
 BuildRequires:	imagemagick
