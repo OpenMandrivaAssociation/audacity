@@ -2,12 +2,13 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version:	2.0.6
-Release:	3
+Version:	2.1.0
+Release:	1
 License:	GPLv2+
 Group:		Sound
 URL:		http://audacity.sourceforge.net/
 Source0:	http://optimate.dl.sourceforge.net/project/audacity/audacity/%{version}/audacity-minsrc-%{version}.tar.xz
+Source100:	%{name}.rpmlintrc
 Patch1:		audacity-ffmpeg.patch
 BuildRequires:	autoconf2.5
 BuildRequires:	desktop-file-utils
@@ -46,7 +47,7 @@ It also has a built-in amplitude envelope editor, a customizable spectrogram
 mode and a frequency analysis window for audio analysis applications.
 
 %prep
-%setup -q -n %{name}-src-%{fversion}
+%setup -q -n %{name}-minsrc-%{fversion}
 %apply_patches
 chmod 644 *.txt
 
