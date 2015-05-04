@@ -1,6 +1,5 @@
-diff -Naur audacity-src-2.0.6-orig/src/FFmpeg.h audacity-src-2.0.6/src/FFmpeg.h
---- audacity-src-2.0.6-orig/src/FFmpeg.h	2014-09-28 21:54:55.159636208 -0400
-+++ audacity-src-2.0.6/src/FFmpeg.h	2014-09-28 21:55:11.246276766 -0400
+--- src/FFmpeg.h	2014-08-27 01:33:29.601443000 +0200
++++ src/FFmpeg.h	2014-08-27 09:20:53.045146000 +0200
 @@ -688,7 +688,7 @@
     FFMPEG_FUNCTION_WITH_RETURN(
        AVOutputFormat*,
@@ -15,7 +14,7 @@ diff -Naur audacity-src-2.0.6-orig/src/FFmpeg.h audacity-src-2.0.6/src/FFmpeg.h
        int,
        av_fifo_size,
 -      (AVFifoBuffer *f),
-+      (FF_CONST_AVUTIL53 AVFifoBuffer *f),
++      (const AVFifoBuffer *f),
        (f)
     );
     FFMPEG_FUNCTION_WITH_RETURN(
@@ -24,7 +23,8 @@ diff -Naur audacity-src-2.0.6-orig/src/FFmpeg.h audacity-src-2.0.6/src/FFmpeg.h
        AVDictionaryEntry *,
        av_dict_get,
 -      (AVDictionary *m, const char *key, const AVDictionaryEntry *prev, int flags),
-+      (FF_CONST_AVUTIL53 AVDictionary *m, const char *key, const AVDictionaryEntry *prev, int flags),
++      (const AVDictionary *m, const char *key, const AVDictionaryEntry *prev, int flags),
        (m, key, prev, flags)
     );
     FFMPEG_FUNCTION_WITH_RETURN(
+
