@@ -2,8 +2,8 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version:	2.1.0
-Release:	7
+Version:	2.1.2
+Release:	1
 License:	GPLv2+
 Group:		Sound
 URL:		http://audacity.sourceforge.net/
@@ -18,7 +18,7 @@ BuildRequires:	zip
 BuildRequires:	ffmpeg-devel
 BuildRequires:	gettext-devel
 BuildRequires:	jpeg-devel
-BuildRequires:	wxgtku2.8-devel >= 2.8.10
+BuildRequires:	wxgtku3.0-devel
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(expat)
 BuildRequires:	pkgconfig(fftw3)
