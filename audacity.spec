@@ -48,7 +48,7 @@ It also has a built-in amplitude envelope editor, a customizable spectrogram
 mode and a frequency analysis window for audio analysis applications.
 
 %prep
-%setup -q -n %{name}-minsrc-%{fversion}
+%setup -q -n %{name}-minsrc-%{fversion}-rc1
 %apply_patches
 chmod 644 *.txt
 
