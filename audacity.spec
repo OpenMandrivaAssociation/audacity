@@ -10,7 +10,7 @@ Group:		Sound
 URL:		https://www.audacityteam.org/
 Source0:	https://www.fosshub.com/Audacity.html/audacity-minsrc-2.2.2.tar.xz
 Source100:	%{name}.rpmlintrc
-Patch1:		audacity-ffmpeg.patch
+#Patch1:		audacity-ffmpeg.patch
 BuildRequires:	autoconf2.5
 BuildRequires:	desktop-file-utils
 BuildRequires:	imagemagick
@@ -49,7 +49,7 @@ mode and a frequency analysis window for audio analysis applications.
 
 %prep
 %setup -q -n %{name}-minsrc-%{fversion}-rc1
-%apply_patches
+#apply_patches
 chmod 644 *.txt
 
 %build
