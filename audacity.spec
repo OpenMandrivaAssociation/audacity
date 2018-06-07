@@ -4,7 +4,7 @@
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
 Version:	2.2.2
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Sound
 URL:		https://www.audacityteam.org/
@@ -57,6 +57,10 @@ export PATH=$PATH:`pwd`
 export LDFLAGS=-lz
 export CFLAGS="%{optflags}"
 export CXXFLAGS="%{optflags}"
+export CC=%__cc
+export CXX=%__cxx
+export OBJCXX=%__cxx
+export LD=%__cxx
 
 ./configure \
     --prefix=%{_prefix} \
