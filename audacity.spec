@@ -38,7 +38,7 @@ BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:  cmake
 BuildRequires:  pkgconfig(python2)
-BuildRequires:  pkgconfig(gtk+)
+BuildRequires:  pkgconfig(gtk+-3.0)
 
 %description
 Audacity is a program that lets you manipulate digital audio waveforms.
