@@ -3,12 +3,12 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version:	2.2.2
+Version:	2.3.0
 Release:	1
 License:	GPLv2+
 Group:		Sound
 URL:		https://www.audacityteam.org/
-Source0:	https://www.fosshub.com/Audacity.html/audacity-minsrc-2.2.2.tar.xz
+Source0:	https://www.fosshub.com/Audacity.html/audacity-minsrc-%{version}.tar.xz
 Source100:	%{name}.rpmlintrc
 #Patch1:		audacity-ffmpeg.patch
 BuildRequires:	autoconf2.5
