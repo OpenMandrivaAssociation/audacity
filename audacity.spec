@@ -56,14 +56,14 @@ mode and a frequency analysis window for audio analysis applications.
 chmod 644 *.txt
 
 %build
-export PATH=$PATH:`pwd`
-export LDFLAGS=-lz
-export CFLAGS="%{optflags}"
-export CXXFLAGS="%{optflags}"
-export CC=%__cc
-export CXX=%__cxx
-export OBJCXX=%__cxx
-export LD=%__cxx
+#export PATH=$PATH:`pwd`
+#export LDFLAGS=-lz
+#export CFLAGS="%{optflags}"
+#export CXXFLAGS="%{optflags}"
+#export CC=%__cc
+#export CXX=%__cxx
+#export OBJCXX=%__cxx
+#export LD=%__cxx
 
 ./configure \
     --prefix=%{_prefix} \
