@@ -3,12 +3,12 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version:	2.2.2
+Version:	2.3.0
 Release:	1
 License:	GPLv2+
 Group:		Sound
 URL:		https://www.audacityteam.org/
-Source0:	https://www.fosshub.com/Audacity.html/audacity-minsrc-2.2.2.tar.xz
+Source0:	https://www.fosshub.com/Audacity.html/audacity-minsrc-%{version}.tar.xz
 Source100:	%{name}.rpmlintrc
 #Patch1:		audacity-ffmpeg.patch
 BuildRequires:	autoconf2.5
@@ -36,6 +36,9 @@ BuildRequires:	pkgconfig(twolame)
 BuildRequires:	pkgconfig(vamp-sdk)
 BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(zlib)
+BuildRequires:  cmake
+BuildRequires:  pkgconfig(python2)
+BuildRequires:  pkgconfig(gtk+-3.0)
 
 %description
 Audacity is a program that lets you manipulate digital audio waveforms.
@@ -48,19 +51,19 @@ It also has a built-in amplitude envelope editor, a customizable spectrogram
 mode and a frequency analysis window for audio analysis applications.
 
 %prep
-%setup -q -n %{name}-minsrc-%{fversion}-rc1
+%setup -q -n %{name}-minsrc-%{fversion}
 #apply_patches
 chmod 644 *.txt
 
 %build
-export PATH=$PATH:`pwd`
-export LDFLAGS=-lz
-export CFLAGS="%{optflags}"
-export CXXFLAGS="%{optflags}"
-export CC=%__cc
-export CXX=%__cxx
-export OBJCXX=%__cxx
-export LD=%__cxx
+#export PATH=$PATH:`pwd`
+#export LDFLAGS=-lz
+#export CFLAGS="%{optflags}"
+#export CXXFLAGS="%{optflags}"
+#export CC=%__cc
+#export CXX=%__cxx
+#export OBJCXX=%__cxx
+#export LD=%__cxx
 
 ./configure \
     --prefix=%{_prefix} \
