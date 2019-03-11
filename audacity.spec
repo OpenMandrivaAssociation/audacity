@@ -3,8 +3,8 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version:	2.3.0
-Release:	2
+Version:	2.3.1
+Release:	1
 License:	GPLv2+
 Group:		Sound
 URL:		https://www.audacityteam.org/
@@ -81,10 +81,10 @@ chmod 644 *.txt
     --with-portaudio \
     --with-libtwolame=system \
     --with-ffmpeg
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 %find_lang %{name}
 
@@ -110,6 +110,3 @@ desktop-file-install \
 %{_datadir}/appdata/audacity.appdata.xml
 %{_datadir}/mime/packages/audacity.xml
 %{_mandir}/man1/audacity.1*
-
-
-
