@@ -1,10 +1,2 @@
-removed_sources:
-  audacity-minsrc-2.0.0.tar.bz2: 0175474e63c51aaa97df9b45574f7f307f1d3bc8
-  audacity-minsrc-2.0.2.tar.bz2: c5e4058346c96713a0d39fcd6b33f27137589b06
-  audacity-minsrc-2.0.4.tar.xz: 4c1a42137cef598e3d83829ca7c22dba62d215be
-  audacity-minsrc-2.0.5.tar.xz: f63cafb81f29e7f3813dc9f80fb1dfdbcfe46b33
-  audacity-minsrc-2.1.0.tar.xz: a53bce0276240bb56f2e3fd1bf235a4ef688caa3
-  audacity-minsrc-2.1.2.tar.xz: d0b8924b846f833182e674d621b28eb666cc97d6
 sources:
-  audacity-minsrc-2.2.2.tar.xz: ebc4c7a4f690409824eb1e30303b3c4b0af5bee5
-  audacity-minsrc-2.3.0.tar.xz: 9a643c62e6fa9c192f90ac968e2256500dfd1350
+  audacity-minsrc-2.3.1.tar.xz: cee67c299c1ebae48ff3b518a2e1ae5cbfd51012
