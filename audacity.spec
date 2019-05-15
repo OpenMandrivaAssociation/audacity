@@ -14,6 +14,7 @@ Source100:	%{name}.rpmlintrc
 BuildRequires:	autoconf2.5
 BuildRequires:	desktop-file-utils
 BuildRequires:	imagemagick
+BuildRequires:  lame-devel
 #for compressing the help file:
 BuildRequires:	zip
 BuildRequires:	ffmpeg-devel
