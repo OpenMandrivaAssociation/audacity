@@ -3,7 +3,7 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version:	2.3.1
+Version:	2.3.2
 Release:	1
 License:	GPLv2+
 Group:		Sound
@@ -14,6 +14,7 @@ Source100:	%{name}.rpmlintrc
 BuildRequires:	autoconf2.5
 BuildRequires:	desktop-file-utils
 BuildRequires:	imagemagick
+BuildRequires:  lame-devel
 #for compressing the help file:
 BuildRequires:	zip
 BuildRequires:	ffmpeg-devel
