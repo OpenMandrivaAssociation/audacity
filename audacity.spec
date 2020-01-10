@@ -53,7 +53,7 @@ mode and a frequency analysis window for audio analysis applications.
 
 %prep
 %setup -q -n %{name}-minsrc-%{fversion}
-#apply_patches
+#autopatch -p1
 chmod 644 *.txt
 
 %build
