@@ -15,6 +15,7 @@ Source0:  https://github.com/audacity/audacity/archive/Audacity-%{version}/%{nam
 Source100:	%{name}.rpmlintrc
 #Patch1:		audacity-ffmpeg.patch
 BuildRequires:	autoconf2.5
+BuildRequires:  cmake
 BuildRequires:	desktop-file-utils
 BuildRequires:	imagemagick
 BuildRequires:  lame-devel
@@ -23,6 +24,7 @@ BuildRequires:	zip
 BuildRequires:	ffmpeg-devel
 BuildRequires:	gettext-devel
 BuildRequires:	jpeg-devel
+BuildRequires:  portmidi-devel
 BuildRequires:	wxgtku3.0-devel
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(expat)
@@ -30,18 +32,20 @@ BuildRequires:	pkgconfig(fftw3)
 BuildRequires:	pkgconfig(flac++)
 BuildRequires:	pkgconfig(id3tag)
 BuildRequires:	pkgconfig(jack)
+BuildRequires:  pkgconfig(lv2)
 BuildRequires:	pkgconfig(mad)
 BuildRequires:	pkgconfig(ogg)
 BuildRequires:	pkgconfig(samplerate)
 BuildRequires:	pkgconfig(sndfile)
 BuildRequires:	pkgconfig(soundtouch)
 BuildRequires:	pkgconfig(speex)
+BuildRequires:  pkgconfig(soxr)
 BuildRequires:	pkgconfig(twolame)
 BuildRequires:	pkgconfig(vamp-sdk)
 BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(zlib)
-BuildRequires:  cmake
 BuildRequires:  pkgconfig(python)
+BuildRequires:  pkgconfig(portaudio-2.0)
 BuildRequires:  pkgconfig(gtk+-3.0)
 
 %description
@@ -107,6 +111,8 @@ desktop-file-install \
 %files -f %{name}.lang
 %doc LICENSE.txt README.txt
 %{_bindir}/*
+%{_libdir}/audacity/libsuil_x11.so
+%{_libdir}/audacity/libsuil_x11_in_gtk3.so
 %{_datadir}/audacity
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/audacity.*
