@@ -3,7 +3,7 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version:	2.3.3
+Version:	2.4.0
 Release:	1
 License:	GPLv2+
 Group:		Sound
@@ -38,7 +38,7 @@ BuildRequires:	pkgconfig(vamp-sdk)
 BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:  cmake
-BuildRequires:  pkgconfig(python2)
+BuildRequires:  pkgconfig(python)
 BuildRequires:  pkgconfig(gtk+-3.0)
 
 %description
