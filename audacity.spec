@@ -1,17 +1,21 @@
 %define fversion %{version}
+%define oname   Audacity
 %define _disable_lto 1
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version:	2.3.3
+Version:	2.4.0
 Release:	1
 License:	GPLv2+
 Group:		Sound
 URL:		https://www.audacityteam.org/
-Source0:	https://www.fosshub.com/Audacity.html/audacity-minsrc-%{version}.tar.xz
+Source0:  https://github.com/audacity/audacity/archive/Audacity-%{version}/%{name}-%{oname}-%{version}.tar.gz
+# As of 2.4.0 Audacity from audacity website not contains configure. So, we switch source to GitHub
+#Source0:	https://www.fosshub.com/Audacity.html/audacity-minsrc-%{version}.tar.xz
 Source100:	%{name}.rpmlintrc
 #Patch1:		audacity-ffmpeg.patch
 BuildRequires:	autoconf2.5
+BuildRequires:  cmake
 BuildRequires:	desktop-file-utils
 BuildRequires:	imagemagick
 BuildRequires:  lame-devel
@@ -20,6 +24,8 @@ BuildRequires:	zip
 BuildRequires:	ffmpeg-devel
 BuildRequires:	gettext-devel
 BuildRequires:	jpeg-devel
+# Is in unsupported. So leave it disable
+#BuildRequires:  portmidi-devel
 BuildRequires:	wxgtku3.0-devel
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(expat)
@@ -27,18 +33,20 @@ BuildRequires:	pkgconfig(fftw3)
 BuildRequires:	pkgconfig(flac++)
 BuildRequires:	pkgconfig(id3tag)
 BuildRequires:	pkgconfig(jack)
+BuildRequires:  pkgconfig(lv2)
 BuildRequires:	pkgconfig(mad)
 BuildRequires:	pkgconfig(ogg)
 BuildRequires:	pkgconfig(samplerate)
 BuildRequires:	pkgconfig(sndfile)
 BuildRequires:	pkgconfig(soundtouch)
 BuildRequires:	pkgconfig(speex)
+BuildRequires:  pkgconfig(soxr)
 BuildRequires:	pkgconfig(twolame)
 BuildRequires:	pkgconfig(vamp-sdk)
 BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(zlib)
-BuildRequires:  cmake
-BuildRequires:  pkgconfig(python2)
+BuildRequires:  pkgconfig(python)
+BuildRequires:  pkgconfig(portaudio-2.0)
 BuildRequires:  pkgconfig(gtk+-3.0)
 
 %description
@@ -52,7 +60,7 @@ It also has a built-in amplitude envelope editor, a customizable spectrogram
 mode and a frequency analysis window for audio analysis applications.
 
 %prep
-%setup -q -n %{name}-minsrc-%{fversion}
+%setup -q -n %{name}-%{oname}-%{fversion}
 #autopatch -p1
 chmod 644 *.txt
 
@@ -104,6 +112,8 @@ desktop-file-install \
 %files -f %{name}.lang
 %doc LICENSE.txt README.txt
 %{_bindir}/*
+%{_libdir}/audacity/libsuil_x11.so
+%{_libdir}/audacity/libsuil_x11_in_gtk3.so
 %{_datadir}/audacity
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/audacity.*
