@@ -9,7 +9,7 @@ Release:	1
 License:	GPLv2+
 Group:		Sound
 URL:		https://www.audacityteam.org/
-# Source0:  https://github.com/audacity/audacity/archive/Audacity-%{version}/%{name}-%{oname}-%{version}.tar.gz
+Source0:  https://github.com/audacity/audacity/archive/Audacity-%{version}/%{name}-%{oname}-%{version}.tar.gz
 # As of 2.4.0 Audacity from audacity website not contains configure. So, we switch source to GitHub
 #Source0:	https://www.fosshub.com/Audacity.html/audacity-minsrc-%{version}.tar.xz
 Source100:	%{name}.rpmlintrc
