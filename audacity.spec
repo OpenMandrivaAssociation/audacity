@@ -89,6 +89,9 @@ chmod 644 *.txt
     --with-portmixer \
     --with-portaudio \
     --with-libtwolame=system \
+    %ifnarch %ix86 x86_64
+    --enable-sse=no \
+    %endif
     --with-ffmpeg
 %make_build
 
