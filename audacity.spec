@@ -24,7 +24,8 @@ BuildRequires:	zip
 BuildRequires:	ffmpeg-devel
 BuildRequires:	gettext-devel
 BuildRequires:	jpeg-devel
-BuildRequires:  portmidi-devel
+# Is in unsupported. So leave it disable
+#BuildRequires:  portmidi-devel
 BuildRequires:	wxgtku3.0-devel
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(expat)
