@@ -1,4 +1,5 @@
 %define fversion %{version}
+%define oname   Audacity
 %define _disable_lto 1
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
@@ -8,7 +9,9 @@ Release:	1
 License:	GPLv2+
 Group:		Sound
 URL:		https://www.audacityteam.org/
-Source0:	https://www.fosshub.com/Audacity.html/audacity-minsrc-%{version}.tar.xz
+# Source0:  https://github.com/audacity/audacity/archive/Audacity-%{version}/%{name}-%{oname}-%{version}.tar.gz
+# As of 2.4.0 Audacity from audacity website not contains configure. So, we switch source to GitHub
+#Source0:	https://www.fosshub.com/Audacity.html/audacity-minsrc-%{version}.tar.xz
 Source100:	%{name}.rpmlintrc
 #Patch1:		audacity-ffmpeg.patch
 BuildRequires:	autoconf2.5
@@ -52,7 +55,7 @@ It also has a built-in amplitude envelope editor, a customizable spectrogram
 mode and a frequency analysis window for audio analysis applications.
 
 %prep
-%setup -q -n %{name}-minsrc-%{fversion}
+%setup -q -n %{name}-%{oname}-%{fversion}
 #autopatch -p1
 chmod 644 *.txt
 
