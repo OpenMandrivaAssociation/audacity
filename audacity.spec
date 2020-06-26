@@ -4,7 +4,7 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version:	2.4.1
+Version:	2.4.2
 Release:	1
 License:	GPLv2+
 Group:		Sound
