@@ -1,6 +1,7 @@
 %define fversion %{version}
 %define oname   Audacity
 %define _disable_lto 1
+%define _disable_ld_no_undefined 1
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
