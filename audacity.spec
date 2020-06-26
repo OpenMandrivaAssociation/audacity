@@ -13,7 +13,7 @@ Source0:  https://github.com/audacity/audacity/archive/Audacity-%{version}/%{nam
 # As of 2.4.0 Audacity from audacity website not contains configure. So, we switch source to GitHub
 #Source0:	https://www.fosshub.com/Audacity.html/audacity-minsrc-%{version}.tar.xz
 Source100:	%{name}.rpmlintrc
-#Patch1:		audacity-ffmpeg.patch
+
 BuildRequires:	autoconf2.5
 BuildRequires:  cmake
 BuildRequires:	desktop-file-utils
@@ -74,25 +74,26 @@ chmod 644 *.txt
 #export OBJCXX=%__cxx
 #export LD=%__cxx
 
-./configure \
-    --prefix=%{_prefix} \
-    --libdir=%{_libdir} \
-    --mandir=%{_mandir} \
-    --enable-optimise \
-    --enable-unicode \
-    --with-vorbis=system \
-    --with-libmad=system \
-    --with-libsndfile=system \
-    --with-libsamplerate \
-    --with-id3tag=system \
-    --with-soundtouch=system \
-    --with-portmixer \
-    --with-portaudio \
-    --with-libtwolame=system \
-    %ifnarch %ix86 x86_64
-    --enable-sse=no \
-    %endif
-    --with-ffmpeg
+#./configure \
+#    --prefix=%{_prefix} \
+#    --libdir=%{_libdir} \
+#    --mandir=%{_mandir} \
+#    --enable-optimise \
+#    --enable-unicode \
+#    --with-vorbis=system \
+#    --with-libmad=system \
+#    --with-libsndfile=system \
+#    --with-libsamplerate \
+#    --with-id3tag=system \
+#    --with-soundtouch=system \
+#    --with-portmixer \
+#    --with-portaudio \
+#    --with-libtwolame=system \
+#    %ifnarch %ix86 x86_64
+#    --enable-sse=no \
+#    %endif
+#    --with-ffmpeg
+%cmake -DCMAKE_BUILD_TYPE=Release
 %make_build
 
 %install
