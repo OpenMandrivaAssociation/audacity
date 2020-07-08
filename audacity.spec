@@ -12,6 +12,7 @@ Group:		Sound
 URL:		https://www.audacityteam.org/
 Source0:  https://github.com/audacity/audacity/archive/Audacity-%{version}/%{name}-%{oname}-%{version}.tar.gz
 # As of 2.4.0 Audacity from audacity website not contains configure. So, we switch source to GitHub
+# As of 2.4.2 Audacity from both sources not contains configure, so we switch to cmake.
 #Source0:	https://www.fosshub.com/Audacity.html/audacity-minsrc-%{version}.tar.xz
 Source100:	%{name}.rpmlintrc
 
@@ -121,11 +122,12 @@ desktop-file-install \
 %files -f %{name}.lang
 %doc LICENSE.txt README.txt
 %{_bindir}/*
-#{_libdir}/audacity/libsuil_x11.so
-#{_libdir}/audacity/libsuil_x11_in_gtk3.so
+%{_libdir}/audacity/suil_x11.so
+%{_libdir}/audacity/suil_x11_in_gtk3.so
 %{_datadir}/audacity
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/audacity.*
+%{_datadir}/icons/hicolor/*x*/audacity.png
 %{_datadir}/pixmaps/*
 %{_datadir}/appdata/audacity.appdata.xml
 %{_datadir}/mime/packages/audacity.xml
