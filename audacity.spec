@@ -121,8 +121,8 @@ desktop-file-install \
 %files -f %{name}.lang
 %doc LICENSE.txt README.txt
 %{_bindir}/*
-%{_libdir}/audacity/libsuil_x11.so
-%{_libdir}/audacity/libsuil_x11_in_gtk3.so
+#{_libdir}/audacity/libsuil_x11.so
+#{_libdir}/audacity/libsuil_x11_in_gtk3.so
 %{_datadir}/audacity
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/audacity.*
