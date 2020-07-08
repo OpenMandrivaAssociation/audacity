@@ -102,7 +102,7 @@ export CXX=g++
 %make_build
 
 %install
-%make_install
+%make_install -C build
 
 %find_lang %{name}
 
