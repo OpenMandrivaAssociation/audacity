@@ -1,19 +1,22 @@
 %define fversion %{version}
 %define oname   Audacity
 %define _disable_lto 1
+%define _disable_ld_no_undefined 1
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version:	2.4.1
-Release:	2
+Version:	2.4.2
+Release:	1
 License:	GPLv2+
 Group:		Sound
 URL:		https://www.audacityteam.org/
 Source0:  https://github.com/audacity/audacity/archive/Audacity-%{version}/%{name}-%{oname}-%{version}.tar.gz
 # As of 2.4.0 Audacity from audacity website not contains configure. So, we switch source to GitHub
+# As of 2.4.2 Audacity from both sources not contains configure, so we switch to cmake.
 #Source0:	https://www.fosshub.com/Audacity.html/audacity-minsrc-%{version}.tar.xz
 Source100:	%{name}.rpmlintrc
-#Patch1:		audacity-ffmpeg.patch
+Patch0:         audacity-2.4.2-default-theme-dark.patch
+
 BuildRequires:	autoconf2.5
 BuildRequires:  cmake
 BuildRequires:	desktop-file-utils
@@ -48,6 +51,10 @@ BuildRequires:	pkgconfig(zlib)
 BuildRequires:  pkgconfig(python)
 BuildRequires:  pkgconfig(portaudio-2.0)
 BuildRequires:  pkgconfig(gtk+-3.0)
+BuildRequires:  pkgconfig(gtk+-x11-2.0)
+BuildRequires:  pkgconfig(gtk+-x11-3.0)
+BuildRequires:  pkgconfig(Qt5Gui)
+BuildRequires:  pkgconfig(Qt5Widgets)
 
 %description
 Audacity is a program that lets you manipulate digital audio waveforms.
@@ -61,10 +68,14 @@ mode and a frequency analysis window for audio analysis applications.
 
 %prep
 %setup -q -n %{name}-%{oname}-%{fversion}
-#autopatch -p1
+%autopatch -p1
 chmod 644 *.txt
 
 %build
+export CC=gcc
+export CXX=g++
+
+[ ! -f src/RevisionIdent.h ] && echo ' ' > src/RevisionIdent.h
 #export PATH=$PATH:`pwd`
 #export LDFLAGS=-lz
 #export CFLAGS="%{optflags}"
@@ -74,29 +85,30 @@ chmod 644 *.txt
 #export OBJCXX=%__cxx
 #export LD=%__cxx
 
-./configure \
-    --prefix=%{_prefix} \
-    --libdir=%{_libdir} \
-    --mandir=%{_mandir} \
-    --enable-optimise \
-    --enable-unicode \
-    --with-vorbis=system \
-    --with-libmad=system \
-    --with-libsndfile=system \
-    --with-libsamplerate \
-    --with-id3tag=system \
-    --with-soundtouch=system \
-    --with-portmixer \
-    --with-portaudio \
-    --with-libtwolame=system \
-    %ifnarch %ix86 x86_64
-    --enable-sse=no \
-    %endif
-    --with-ffmpeg
+#./configure \
+#    --prefix=%{_prefix} \
+#    --libdir=%{_libdir} \
+#    --mandir=%{_mandir} \
+#    --enable-optimise \
+#    --enable-unicode \
+#    --with-vorbis=system \
+#    --with-libmad=system \
+#    --with-libsndfile=system \
+#    --with-libsamplerate \
+#    --with-id3tag=system \
+#    --with-soundtouch=system \
+#    --with-portmixer \
+#    --with-portaudio \
+#    --with-libtwolame=system \
+#    %ifnarch %ix86 x86_64
+#    --enable-sse=no \
+#    %endif
+#    --with-ffmpeg
+%cmake -DCMAKE_BUILD_TYPE=Release
 %make_build
 
 %install
-%make_install
+%make_install -C build
 
 %find_lang %{name}
 
@@ -115,11 +127,12 @@ desktop-file-install \
 %files -f %{name}.lang
 %doc LICENSE.txt README.txt
 %{_bindir}/*
-%{_libdir}/audacity/libsuil_x11.so
-%{_libdir}/audacity/libsuil_x11_in_gtk3.so
+%{_libdir}/audacity/suil_x11.so
+%{_libdir}/audacity/suil_x11_in_gtk3.so
 %{_datadir}/audacity
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/audacity.*
+%{_datadir}/icons/hicolor/*x*/audacity.png
 %{_datadir}/pixmaps/*
 %{_datadir}/appdata/audacity.appdata.xml
 %{_datadir}/mime/packages/audacity.xml
