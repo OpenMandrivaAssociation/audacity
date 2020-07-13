@@ -129,6 +129,9 @@ desktop-file-install \
 %{_bindir}/*
 %{_libdir}/audacity/suil_x11.so
 %{_libdir}/audacity/suil_x11_in_gtk3.so
+%{_libdir}/audacity/suil_qt5_in_gtk2.so
+%{_libdir}/audacity/suil_qt5_in_gtk3.so
+%{_libdir}/audacity/suil_x11_in_gtk2.so
 %{_datadir}/audacity
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/audacity.*
