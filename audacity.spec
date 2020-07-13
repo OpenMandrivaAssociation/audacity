@@ -15,6 +15,7 @@ Source0:  https://github.com/audacity/audacity/archive/Audacity-%{version}/%{nam
 # As of 2.4.2 Audacity from both sources not contains configure, so we switch to cmake.
 #Source0:	https://www.fosshub.com/Audacity.html/audacity-minsrc-%{version}.tar.xz
 Source100:	%{name}.rpmlintrc
+Patch0:         audacity-2.4.2-default-theme-dark.patch
 
 BuildRequires:	autoconf2.5
 BuildRequires:  cmake
@@ -63,7 +64,7 @@ mode and a frequency analysis window for audio analysis applications.
 
 %prep
 %setup -q -n %{name}-%{oname}-%{fversion}
-#autopatch -p1
+%autopatch -p1
 chmod 644 *.txt
 
 %build
