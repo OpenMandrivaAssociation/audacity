@@ -1,0 +1,15 @@
+diff -up audacity-minsrc-2.4.2/src/Theme.cpp.dark audacity-minsrc-2.4.2/src/Theme.cpp
+--- audacity-minsrc-2.4.2/src/Theme.cpp.dark	2020-05-30 13:55:53.000000000 +0200
++++ audacity-minsrc-2.4.2/src/Theme.cpp	2020-06-30 12:13:36.704683529 +0200
+@@ -1299,11 +1299,7 @@ void auStaticText::OnPaint(wxPaintEvent
+ }
+ 
+ constexpr int defaultTheme =
+-#ifdef EXPERIMENTAL_DA
+    2 // "dark"
+-#else
+-   1 // "light"
+-#endif
+ ;
+ 
+ ChoiceSetting GUITheme{
