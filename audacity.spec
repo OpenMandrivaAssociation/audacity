@@ -44,6 +44,7 @@ BuildRequires:	pkgconfig(sndfile)
 BuildRequires:	pkgconfig(soundtouch)
 BuildRequires:	pkgconfig(speex)
 BuildRequires:  pkgconfig(soxr)
+BuildRequires:	pkgconfig(suil-0)
 BuildRequires:	pkgconfig(twolame)
 BuildRequires:	pkgconfig(vamp-sdk)
 BuildRequires:	pkgconfig(vorbis)
@@ -51,7 +52,6 @@ BuildRequires:	pkgconfig(zlib)
 BuildRequires:  pkgconfig(python)
 BuildRequires:  pkgconfig(portaudio-2.0)
 BuildRequires:  pkgconfig(gtk+-3.0)
-BuildRequires:  pkgconfig(gtk+-x11-2.0)
 BuildRequires:  pkgconfig(gtk+-x11-3.0)
 BuildRequires:  pkgconfig(Qt5Gui)
 BuildRequires:  pkgconfig(Qt5Widgets)
@@ -127,11 +127,6 @@ desktop-file-install \
 %files -f %{name}.lang
 %doc LICENSE.txt README.txt
 %{_bindir}/*
-%{_libdir}/audacity/suil_x11.so
-%{_libdir}/audacity/suil_x11_in_gtk3.so
-%{_libdir}/audacity/suil_qt5_in_gtk2.so
-%{_libdir}/audacity/suil_qt5_in_gtk3.so
-%{_libdir}/audacity/suil_x11_in_gtk2.so
 %{_datadir}/audacity
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/audacity.*
