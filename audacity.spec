@@ -30,7 +30,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	jpeg-devel
 # Is in unsupported. So leave it disable
 #BuildRequires:  portmidi-devel
-BuildRequires:	wxgtku3.1-devel = 3.1.4-1
+#BuildRequires:	wxgtku3.1-devel = 3.1.4-1
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(expat)
 BuildRequires:	pkgconfig(fftw3)
@@ -75,7 +75,7 @@ mode and a frequency analysis window for audio analysis applications.
 %setup -q -n %{name}-%{oname}-%{fversion}
 #autopatch -p1
 %patch0 -p1
-%patch1 -p0
+#patch1 -p0
 chmod 644 *.txt
 
 %build
@@ -111,7 +111,9 @@ chmod 644 *.txt
 #    --enable-sse=no \
 #    %endif
 #    --with-ffmpeg
-%cmake -DCMAKE_BUILD_TYPE=Release
+%cmake \
+        -DCMAKE_BUILD_TYPE=Release \
+        -Daudacity_use_wxwidgets=local
 %make_build
 
 %install
