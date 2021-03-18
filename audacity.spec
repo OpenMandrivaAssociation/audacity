@@ -29,7 +29,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	jpeg-devel
 # Is in unsupported. So leave it disable
 #BuildRequires:  portmidi-devel
-BuildRequires:	wxgtku3.1-devel
+#BuildRequires:	wxgtku3.1-devel
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(expat)
 BuildRequires:	pkgconfig(fftw3)
