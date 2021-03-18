@@ -18,7 +18,7 @@ Source100:	%{name}.rpmlintrc
 Patch0:         audacity-2.4.2-default-theme-dark.patch
 Patch1:         system-wx.patch
 
-BuildRequires:  git
+#BuildRequires:  git
 BuildRequires:	autoconf2.5
 BuildRequires:  cmake
 BuildRequires:	desktop-file-utils
@@ -57,7 +57,7 @@ BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:  pkgconfig(python)
 BuildRequires:  pkgconfig(portaudio-2.0)
-BuildRequires:  pkgconfig(gtk+-2.0)
+#BuildRequires:  pkgconfig(gtk+-2.0)
 BuildRequires:  pkgconfig(gtk+-3.0)
 BuildRequires:  pkgconfig(gtk+-x11-3.0)
 BuildRequires:  pkgconfig(Qt5Gui)
@@ -81,8 +81,8 @@ mode and a frequency analysis window for audio analysis applications.
 chmod 644 *.txt
 
 %build
-#export CC=gcc
-#export CXX=g++
+export CC=gcc
+export CXX=g++
 
 [ ! -f src/RevisionIdent.h ] && echo ' ' > src/RevisionIdent.h
 #export PATH=$PATH:`pwd`
@@ -114,8 +114,8 @@ chmod 644 *.txt
 #    %endif
 #    --with-ffmpeg
 %cmake \
-        -DCMAKE_BUILD_TYPE=Release \
-        -Daudacity_use_wxwidgets=local
+        -DCMAKE_BUILD_TYPE=Release
+#        -Daudacity_use_wxwidgets=local
 %make_build
 
 %install
