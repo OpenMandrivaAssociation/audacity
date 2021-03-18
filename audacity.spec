@@ -16,6 +16,7 @@ Source0:  https://github.com/audacity/audacity/archive/Audacity-%{version}/%{nam
 #Source0:	https://www.fosshub.com/Audacity.html/audacity-minsrc-%{version}.tar.xz
 Source100:	%{name}.rpmlintrc
 Patch0:         audacity-2.4.2-default-theme-dark.patch
+Patch1:         system-wx.patch
 
 BuildRequires:	autoconf2.5
 BuildRequires:  cmake
@@ -29,7 +30,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	jpeg-devel
 # Is in unsupported. So leave it disable
 #BuildRequires:  portmidi-devel
-#BuildRequires:	wxgtku3.1-devel
+BuildRequires:	wxgtku3.1-devel
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(expat)
 BuildRequires:	pkgconfig(fftw3)
@@ -72,7 +73,9 @@ mode and a frequency analysis window for audio analysis applications.
 
 %prep
 %setup -q -n %{name}-%{oname}-%{fversion}
-%autopatch -p1
+#autopatch -p1
+%patch0 -p1
+%patch1 -p0
 chmod 644 *.txt
 
 %build
