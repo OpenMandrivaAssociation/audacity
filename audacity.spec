@@ -5,8 +5,8 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version:	2.4.2
-Release:	2
+Version:	3.0.0
+Release:	1
 License:	GPLv2+
 Group:		Sound
 URL:		https://www.audacityteam.org/
@@ -76,8 +76,8 @@ mode and a frequency analysis window for audio analysis applications.
 chmod 644 *.txt
 
 %build
-export CC=gcc
-export CXX=g++
+#export CC=gcc
+#export CXX=g++
 
 [ ! -f src/RevisionIdent.h ] && echo ' ' > src/RevisionIdent.h
 #export PATH=$PATH:`pwd`
