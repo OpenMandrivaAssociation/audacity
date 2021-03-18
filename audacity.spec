@@ -77,7 +77,7 @@ mode and a frequency analysis window for audio analysis applications.
 %setup -q -n %{name}-%{oname}-%{fversion}
 #autopatch -p1
 %patch0 -p1
-#patch1 -p0
+%patch1 -p0
 chmod 644 *.txt
 
 %build
