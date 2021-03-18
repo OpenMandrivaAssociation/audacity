@@ -18,6 +18,7 @@ Source100:	%{name}.rpmlintrc
 Patch0:         audacity-2.4.2-default-theme-dark.patch
 Patch1:         system-wx.patch
 
+BuildRequires:  git
 BuildRequires:	autoconf2.5
 BuildRequires:  cmake
 BuildRequires:	desktop-file-utils
