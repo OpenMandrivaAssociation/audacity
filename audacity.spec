@@ -5,8 +5,8 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version:	2.4.2
-Release:	2
+Version:	3.0.2
+Release:	1
 License:	GPLv2+
 Group:		Sound
 URL:		https://www.audacityteam.org/
@@ -16,7 +16,10 @@ Source0:  https://github.com/audacity/audacity/archive/Audacity-%{version}/%{nam
 #Source0:	https://www.fosshub.com/Audacity.html/audacity-minsrc-%{version}.tar.xz
 Source100:	%{name}.rpmlintrc
 Patch0:         audacity-2.4.2-default-theme-dark.patch
+Patch1:         system-wx.patch
+Patch2:         0001-Fix-compilation-with-llvm-11.0.1.patch
 
+#BuildRequires:  git
 BuildRequires:	autoconf2.5
 BuildRequires:  cmake
 BuildRequires:	desktop-file-utils
@@ -55,6 +58,7 @@ BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:  pkgconfig(python)
 BuildRequires:  pkgconfig(portaudio-2.0)
+#BuildRequires:  pkgconfig(gtk+-2.0)
 BuildRequires:  pkgconfig(gtk+-3.0)
 BuildRequires:  pkgconfig(gtk+-x11-3.0)
 BuildRequires:  pkgconfig(Qt5Gui)
@@ -72,7 +76,10 @@ mode and a frequency analysis window for audio analysis applications.
 
 %prep
 %setup -q -n %{name}-%{oname}-%{fversion}
-%autopatch -p1
+#autopatch -p1
+%patch0 -p1
+%patch1 -p0
+%patch2 -p1
 chmod 644 *.txt
 
 %build
@@ -108,7 +115,9 @@ export CXX=g++
 #    --enable-sse=no \
 #    %endif
 #    --with-ffmpeg
-%cmake -DCMAKE_BUILD_TYPE=Release
+%cmake \
+        -DCMAKE_BUILD_TYPE=Release
+#        -Daudacity_use_wxwidgets=local
 %make_build
 
 %install
@@ -131,6 +140,8 @@ desktop-file-install \
 %files -f %{name}.lang
 %doc LICENSE.txt README.txt
 %{_bindir}/*
+%{_libdir}/%{name}/libwx_baseu*
+%{_libdir}/%{name}/libwx_gtk3u_*
 %{_datadir}/audacity
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/audacity.*
