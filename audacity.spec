@@ -17,6 +17,7 @@ Source0:  https://github.com/audacity/audacity/archive/Audacity-%{version}/%{nam
 Source100:	%{name}.rpmlintrc
 Patch0:         audacity-2.4.2-default-theme-dark.patch
 Patch1:         system-wx.patch
+Patch2:         0001-Fix-compilation-with-llvm-11.0.1.patch
 
 #BuildRequires:  git
 BuildRequires:	autoconf2.5
@@ -78,6 +79,7 @@ mode and a frequency analysis window for audio analysis applications.
 #autopatch -p1
 %patch0 -p1
 %patch1 -p0
+%patch2 -p1
 chmod 644 *.txt
 
 %build
