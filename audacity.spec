@@ -5,7 +5,7 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version:	3.0.0
+Version:	3.0.2
 Release:	1
 License:	GPLv2+
 Group:		Sound
