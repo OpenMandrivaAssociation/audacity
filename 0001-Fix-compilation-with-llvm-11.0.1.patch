@@ -1,0 +1,24 @@
+From d47264accfb6e76be035c7903dcccf1510906baf Mon Sep 17 00:00:00 2001
+From: James Crook <james.k.crook@gmail.com>
+Date: Wed, 14 Apr 2021 22:51:59 +0100
+Subject: [PATCH] Fix compilation with llvm 11.0.1
+
+---
+ src/widgets/Grid.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/widgets/Grid.cpp b/src/widgets/Grid.cpp
+index 42e9fe432..da3f6d4e8 100644
+--- a/src/widgets/Grid.cpp
++++ b/src/widgets/Grid.cpp
+@@ -572,7 +572,7 @@ void Grid::OnKeyDown(wxKeyEvent &event)
+          {
+             wxTextDataObject *data = safenew wxTextDataObject(GetCellValue(crow, ccol));
+             wxClipboard::Get()->SetData(data);
+-            SetCellValue(crow, ccol, {});
++            SetCellValue(crow, ccol, "" );
+             return;
+          }
+          break;
+-- 
+2.31.1
