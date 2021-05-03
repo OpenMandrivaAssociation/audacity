@@ -6,7 +6,7 @@
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
 Version:	3.0.2
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Sound
 URL:		https://www.audacityteam.org/
@@ -18,6 +18,7 @@ Source100:	%{name}.rpmlintrc
 Patch0:         audacity-2.4.2-default-theme-dark.patch
 Patch1:         system-wx.patch
 Patch2:         0001-Fix-compilation-with-llvm-11.0.1.patch
+Patch3:         audacity-install-rpath.patch
 
 #BuildRequires:  git
 BuildRequires:	autoconf2.5
@@ -80,6 +81,7 @@ mode and a frequency analysis window for audio analysis applications.
 %patch0 -p1
 %patch1 -p0
 %patch2 -p1
+%patch3 -p1
 chmod 644 *.txt
 
 %build
