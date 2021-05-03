@@ -1,3 +1,5 @@
+%global __requires_exclude ^libwx_baseu-3.1.so|^libwx_baseu_net-3.1.so|^libwx_baseu_xml-3.1.so|^libwx_gtk2u_core-3.1.so|^libwx_gtk2u_html-3.1.so|^libwx_gtk2u_qa-3.1.so
+
 %define fversion %{version}
 %define oname   Audacity
 %define _disable_lto 1
@@ -18,7 +20,7 @@ Source100:	%{name}.rpmlintrc
 Patch0:         audacity-2.4.2-default-theme-dark.patch
 Patch1:         system-wx.patch
 Patch2:         0001-Fix-compilation-with-llvm-11.0.1.patch
-Patch3:         audacity-install-rpath.patch
+#Patch3:         audacity-install-rpath.patch
 
 #BuildRequires:  git
 BuildRequires:	autoconf2.5
@@ -81,7 +83,7 @@ mode and a frequency analysis window for audio analysis applications.
 %patch0 -p1
 %patch1 -p0
 %patch2 -p1
-%patch3 -p1
+#patch3 -p1
 chmod 644 *.txt
 
 %build
