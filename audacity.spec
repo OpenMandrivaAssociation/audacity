@@ -21,7 +21,7 @@ Patch2:         0001-Fix-compilation-with-llvm-11.0.1.patch
 Patch3:		audacity-workaround-clang-bug-50230.patch
 
 #BuildRequires:  git
-BuildRequires:	autoconf2.5
+BuildRequires:	ninja
 BuildRequires:  cmake
 BuildRequires:	desktop-file-utils
 BuildRequires:	imagemagick
