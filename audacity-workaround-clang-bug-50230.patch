@@ -1,0 +1,59 @@
+diff -up audacity-Audacity-3.0.2/src/tracks/ui/Scrubbing.cpp.omv~ audacity-Audacity-3.0.2/src/tracks/ui/Scrubbing.cpp
+--- audacity-Audacity-3.0.2/src/tracks/ui/Scrubbing.cpp.omv~	2021-05-05 19:06:23.994720688 +0200
++++ audacity-Audacity-3.0.2/src/tracks/ui/Scrubbing.cpp	2021-05-05 19:13:52.101004300 +0200
+@@ -254,6 +254,7 @@ static const ReservedCommandFlag
+ 
+ namespace {
+    struct MenuItem {
++      MenuItem(CommandID n, TranslatableString l, TranslatableString s, CommandFlag f, void(Scrubber::*m)(const CommandContext&), bool sk, bool(Scrubber::*st)() const):name(n),label(l),status(s),flags(f),memFn(m),seek(sk),StatusTest(st) {}
+       CommandID name;
+       TranslatableString label;
+       TranslatableString status;
+@@ -267,33 +268,35 @@ namespace {
+    using MenuItems = std::vector< MenuItem >;
+    const MenuItems &menuItems()
+    {
+-      static MenuItems theItems{
+       /* i18n-hint: These commands assist the user in finding a sound by ear. ...
+          "Scrubbing" is variable-speed playback, ...
+          "Seeking" is normal speed playback but with skips, ...
+        */
+-      { wxT("Scrub"),       XXO("&Scrub"),           XO("Scrubbing"),
++      static MenuItem m1(
++         wxT("Scrub"),       XXO("&Scrub"),           XO("Scrubbing"),
+          CaptureNotBusyFlag() | HasWaveDataFlag(),
+-         &Scrubber::OnScrub,       false,      &Scrubber::Scrubs,
+-      },
+-
++         &Scrubber::OnScrub,       false,      &Scrubber::Scrubs
++      );
+       /* i18n-hint: These commands assist the user in finding a sound by ear. ...
+          "Scrubbing" is variable-speed playback, ...
+          "Seeking" is normal speed playback but with skips, ...
+        */
+-      { wxT("Seek"),        XXO("See&k"),            XO("Seeking"),
++      static MenuItem m2(
++         wxT("Seek"),        XXO("See&k"),            XO("Seeking"),
+          CaptureNotBusyFlag() | HasWaveDataFlag(),
+-         &Scrubber::OnSeek,        true,       &Scrubber::Seeks,
+-      },
+-
++         &Scrubber::OnSeek,        true,       &Scrubber::Seeks
++      );
+       /* i18n-hint: These commands assist the user in finding a sound by ear. ...
+          "Scrubbing" is variable-speed playback, ...
+          "Seeking" is normal speed playback but with skips, ...
+        */
+-      { wxT("ToggleScrubRuler"),            XXO("Scrub &Ruler"),   {},
++      static MenuItem m3( wxT("ToggleScrubRuler"),            XXO("Scrub &Ruler"),   {},
+          AlwaysEnabledFlag,
+-         &Scrubber::OnToggleScrubRuler, false,    &Scrubber::ShowsBar,
+-      },
++         &Scrubber::OnToggleScrubRuler, false,    &Scrubber::ShowsBar
++      );
++
++      static MenuItems theItems{
++          m1, m2, m3
+       };
+       return theItems;
+    };

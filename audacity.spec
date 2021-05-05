@@ -6,7 +6,7 @@
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
 Version:	3.0.2
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Sound
 URL:		https://www.audacityteam.org/
@@ -18,6 +18,7 @@ Source100:	%{name}.rpmlintrc
 Patch0:         audacity-2.4.2-default-theme-dark.patch
 Patch1:         system-wx.patch
 Patch2:         0001-Fix-compilation-with-llvm-11.0.1.patch
+Patch3:		audacity-workaround-clang-bug-50230.patch
 
 #BuildRequires:  git
 BuildRequires:	autoconf2.5
@@ -75,53 +76,24 @@ It also has a built-in amplitude envelope editor, a customizable spectrogram
 mode and a frequency analysis window for audio analysis applications.
 
 %prep
-%setup -q -n %{name}-%{oname}-%{fversion}
-#autopatch -p1
-%patch0 -p1
-%patch1 -p0
-%patch2 -p1
+%autosetup -p1 -n %{name}-%{oname}-%{fversion}
 chmod 644 *.txt
 
 %build
-export CC=gcc
-export CXX=g++
-
 [ ! -f src/RevisionIdent.h ] && echo ' ' > src/RevisionIdent.h
-#export PATH=$PATH:`pwd`
-#export LDFLAGS=-lz
-#export CFLAGS="%{optflags}"
-#export CXXFLAGS="%{optflags}"
-#export CC=%__cc
-#export CXX=%__cxx
-#export OBJCXX=%__cxx
-#export LD=%__cxx
-
-#./configure \
-#    --prefix=%{_prefix} \
-#    --libdir=%{_libdir} \
-#    --mandir=%{_mandir} \
-#    --enable-optimise \
-#    --enable-unicode \
-#    --with-vorbis=system \
-#    --with-libmad=system \
-#    --with-libsndfile=system \
-#    --with-libsamplerate \
-#    --with-id3tag=system \
-#    --with-soundtouch=system \
-#    --with-portmixer \
-#    --with-portaudio \
-#    --with-libtwolame=system \
-#    %ifnarch %ix86 x86_64
-#    --enable-sse=no \
-#    %endif
-#    --with-ffmpeg
 %cmake \
-        -DCMAKE_BUILD_TYPE=Release
-#        -Daudacity_use_wxwidgets=local
-%make_build
+        -DCMAKE_BUILD_TYPE=Release \
+	-Daudacity_use_ffmpeg=linked \
+	-Daudacity_use_lame=system \
+	-Daudacity_use_midi=system \
+	-Daudacity_use_portsmf=system \
+	-Daudacity_use_sbsms=system \
+	-G Ninja
+	
+%ninja_build
 
 %install
-%make_install -C build
+%ninja_install -C build
 
 %find_lang %{name}
 
