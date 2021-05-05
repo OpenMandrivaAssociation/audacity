@@ -31,6 +31,7 @@ BuildRequires:	zip
 BuildRequires:	ffmpeg-devel
 BuildRequires:	gettext-devel
 BuildRequires:	jpeg-devel
+BuildRequires:	atomic-devel
 # Is in unsupported. So leave it disable
 #BuildRequires:  portmidi-devel
 BuildRequires:	wxgtku3.1-devel
