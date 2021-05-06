@@ -82,13 +82,16 @@ chmod 644 *.txt
 
 %build
 [ ! -f src/RevisionIdent.h ] && echo ' ' > src/RevisionIdent.h
+# sbsms uses x86 inline assembly
 %cmake \
         -DCMAKE_BUILD_TYPE=Release \
 	-Daudacity_use_ffmpeg=linked \
 	-Daudacity_use_lame=system \
 	-Daudacity_use_midi=system \
 	-Daudacity_use_portsmf=system \
+%ifarch %{x86_64}
 	-Daudacity_use_sbsms=system \
+%endif
 	-G Ninja
 	
 %ninja_build
