@@ -27,3 +27,36 @@
  
  target_include_directories( ${TARGET} INTERFACE ${INCLUDES} )
  target_compile_definitions( ${TARGET} INTERFACE ${DEFINES} )
+diff -up audacity-Audacity-3.0.2/cmake-proxies/cmake-modules/CopyLibs.cmake.omv~ audacity-Audacity-3.0.2/cmake-proxies/cmake-modules/CopyLibs.cmake
+diff -up audacity-Audacity-3.0.2/src/CMakeLists.txt.omv~ audacity-Audacity-3.0.2/src/CMakeLists.txt
+--- audacity-Audacity-3.0.2/src/CMakeLists.txt.omv~	2021-05-06 02:47:37.790070773 +0200
++++ audacity-Audacity-3.0.2/src/CMakeLists.txt	2021-05-06 02:48:04.848296083 +0200
+@@ -1277,17 +1277,18 @@ else()
+    # Create the desktop file
+    configure_file( audacity.desktop.in ${_INTDIR}/audacity.desktop )
+ 
++   # Nobody in their right mind would want to
+    # Copy the required wxWidgets libs into the bundle
+-   add_custom_command(
+-      TARGET
+-         ${TARGET}
+-      COMMAND
+-         ${CMAKE_COMMAND} -D SRC="${_EXEDIR}/audacity"
+-                          -D DST="${_DEST}/${_PKGLIB}"
+-                          -D WXWIN="${WXWIN}"
+-                          -P ${CMAKE_MODULE_PATH}/CopyLibs.cmake
+-      POST_BUILD
+-   )
++   #   add_custom_command(
++   #   TARGET
++   #      ${TARGET}
++   #   COMMAND
++   #      ${CMAKE_COMMAND} -D SRC="${_EXEDIR}/audacity"
++   #                       -D DST="${_DEST}/${_PKGLIB}"
++   #                       -D WXWIN="${WXWIN}"
++   #                       -P ${CMAKE_MODULE_PATH}/CopyLibs.cmake
++   #   POST_BUILD
++   #)
+ endif()
+ 
+ set_target_property_all( ${TARGET} RUNTIME_OUTPUT_NAME ${AUDACITY_NAME} )

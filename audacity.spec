@@ -92,6 +92,7 @@ chmod 644 *.txt
 %ifarch %{x86_64}
 	-Daudacity_use_sbsms=system \
 %endif
+	-Daudacity_use_wxwidgets=system \
 	-G Ninja
 	
 %ninja_build
@@ -116,8 +117,6 @@ desktop-file-install \
 %files -f %{name}.lang
 %doc LICENSE.txt README.txt
 %{_bindir}/*
-%{_libdir}/%{name}/libwx_baseu*
-%{_libdir}/%{name}/libwx_gtk3u_*
 %{_datadir}/audacity
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/audacity.*
