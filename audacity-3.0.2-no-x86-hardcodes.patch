@@ -1,0 +1,26 @@
+diff -up audacity-Audacity-3.0.2/cmake-proxies/libsbsms/CMakeLists.txt.omv~ audacity-Audacity-3.0.2/cmake-proxies/libsbsms/CMakeLists.txt
+diff -up audacity-Audacity-3.0.2/lib-src/libsbsms/src/fft.h.omv~ audacity-Audacity-3.0.2/lib-src/libsbsms/src/fft.h
+--- audacity-Audacity-3.0.2/lib-src/libsbsms/src/fft.h.omv~	2021-05-06 02:54:45.279636945 +0200
++++ audacity-Audacity-3.0.2/lib-src/libsbsms/src/fft.h	2021-05-06 02:55:43.831126199 +0200
+@@ -6,7 +6,7 @@
+ #include <string.h>
+ #include "utils.h"
+ 
+-#if defined(ENABLE_SSE) && !defined(APPLE_PPC)
++#if defined(ENABLE_SSE) && !defined(APPLE_PPC) && (defined(__x86_64__) || defined(__i386__))
+ #include "sse.h"
+ #endif
+ 
+diff -up audacity-Audacity-3.0.2/lib-src/libsbsms/src/sse.h.omv~ audacity-Audacity-3.0.2/lib-src/libsbsms/src/sse.h
+--- audacity-Audacity-3.0.2/lib-src/libsbsms/src/sse.h.omv~	2021-05-06 02:55:48.642273665 +0200
++++ audacity-Audacity-3.0.2/lib-src/libsbsms/src/sse.h	2021-05-06 02:56:01.029172079 +0200
+@@ -4,7 +4,7 @@
+ 
+ #include "config.h"
+ 
+-#if defined(ENABLE_SSE) && !defined(APPLE_PPC)
++#if defined(ENABLE_SSE) && !defined(APPLE_PPC) && (defined(__x86_64__) || defined(__i386__))
+ 
+ #include <xmmintrin.h>
+ 
+diff -up audacity-Audacity-3.0.2/src/CMakeLists.txt.omv~ audacity-Audacity-3.0.2/src/CMakeLists.txt
