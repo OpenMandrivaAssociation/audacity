@@ -15,7 +15,7 @@ Source0:  https://github.com/audacity/audacity/archive/Audacity-%{version}/%{nam
 # As of 2.4.2 Audacity from both sources not contains configure, so we switch to cmake.
 #Source0:	https://www.fosshub.com/Audacity.html/audacity-minsrc-%{version}.tar.xz
 Source100:	%{name}.rpmlintrc
-Patch0:         audacity-2.4.2-default-theme-dark.patch
+#Patch0:         audacity-2.4.2-default-theme-dark.patch
 Patch1:         system-wx.patch
 Patch2:         0001-Fix-compilation-with-llvm-11.0.1.patch
 Patch3:		audacity-workaround-clang-bug-50230.patch
