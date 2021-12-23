@@ -11,8 +11,6 @@ License:	GPLv2+
 Group:		Sound
 URL:		https://www.audacityteam.org/
 Source0:  https://github.com/audacity/audacity/archive/Audacity-%{version}/%{name}-%{oname}-%{version}.tar.gz
-# As of 2.4.0 Audacity from audacity website not contains configure. So, we switch source to GitHub
-# As of 2.4.2 Audacity from both sources not contains configure, so we switch to cmake.
 #Source0:	https://www.fosshub.com/Audacity.html/audacity-minsrc-%{version}.tar.xz
 Source100:	%{name}.rpmlintrc
 #Patch0:         audacity-2.4.2-default-theme-dark.patch
@@ -44,6 +42,7 @@ BuildRequires:	pkgconfig(id3tag)
 BuildRequires:	pkgconfig(jack)
 BuildRequires:  pkgconfig(lv2)
 BuildRequires:	pkgconfig(mad)
+BuildRequires:	pkgconfig(opus)
 BuildRequires:	pkgconfig(ogg)
 BuildRequires:	pkgconfig(samplerate)
 BuildRequires:	pkgconfig(sndfile)
