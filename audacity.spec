@@ -17,8 +17,8 @@ Source0:  https://github.com/audacity/audacity/archive/Audacity-%{version}/%{nam
 Source100:	%{name}.rpmlintrc
 #Patch0:         audacity-2.4.2-default-theme-dark.patch
 #Patch1:         system-wx.patch
-Patch2:         0001-Fix-compilation-with-llvm-11.0.1.patch
-Patch3:		audacity-workaround-clang-bug-50230.patch
+#Patch2:         0001-Fix-compilation-with-llvm-11.0.1.patch
+#Patch3:		audacity-workaround-clang-bug-50230.patch
 Patch4:		audacity-3.0.2-no-x86-hardcodes.patch
 
 #BuildRequires:  git
