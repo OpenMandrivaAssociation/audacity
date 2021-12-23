@@ -31,8 +31,7 @@ BuildRequires:	ffmpeg-devel
 BuildRequires:	gettext-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	atomic-devel
-# Is in unsupported. So leave it disable
-#BuildRequires:  portmidi-devel
+BuildRequires:  portmidi-devel
 BuildRequires:	wxgtku3.1-devel
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(expat)
@@ -88,7 +87,7 @@ chmod 644 *.txt
 	-Daudacity_conan_enabled=off \
 	-Daudacity_use_ffmpeg=loaded \
 	-Daudacity_use_lame=system \
-	-Daudacity_use_midi=off \
+	-Daudacity_use_midi=system \
 	-Daudacity_use_portsmf=system \
 %ifarch %{x86_64}
 	-Daudacity_use_sbsms=system \
