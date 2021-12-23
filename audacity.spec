@@ -88,7 +88,7 @@ chmod 644 *.txt
 	-Daudacity_conan_enabled=off \
 	-Daudacity_use_ffmpeg=loaded \
 	-Daudacity_use_lame=system \
-	-Daudacity_use_midi=local \
+	-Daudacity_use_midi=off \
 	-Daudacity_use_portsmf=system \
 %ifarch %{x86_64}
 	-Daudacity_use_sbsms=system \
