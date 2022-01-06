@@ -10,7 +10,7 @@ Release:	1
 License:	GPLv2+
 Group:		Sound
 URL:		https://www.audacityteam.org/
-Source0:  https://github.com/audacity/audacity/archive/Audacity-%{version}/%{name}-%{oname}-%{version}.tar.gz
+#Source0:  https://github.com/audacity/audacity/archive/Audacity-%{version}/%{name}-%{version}-source.tar.gz
 #Source0:	https://www.fosshub.com/Audacity.html/audacity-minsrc-%{version}.tar.xz
 Source100:	%{name}.rpmlintrc
 #Patch0:         audacity-2.4.2-default-theme-dark.patch
@@ -76,11 +76,11 @@ It also has a built-in amplitude envelope editor, a customizable spectrogram
 mode and a frequency analysis window for audio analysis applications.
 
 %prep
-%autosetup -p1 -n %{name}-%{oname}-%{fversion}
+%autosetup -p1 -n %{name}-%{fversion}
 chmod 644 *.txt
 
 %build
-#[ ! -f src/RevisionIdent.h ] && echo ' ' > src/RevisionIdent.h
+[ ! -f src/RevisionIdent.h ] && echo ' ' > src/RevisionIdent.h
 # sbsms uses x86 inline assembly
 %cmake \
         -DCMAKE_BUILD_TYPE=Release \
