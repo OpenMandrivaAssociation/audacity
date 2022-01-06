@@ -10,8 +10,8 @@ Release:	1
 License:	GPLv2+
 Group:		Sound
 URL:		https://www.audacityteam.org/
-#Source0:  https://github.com/audacity/audacity/archive/Audacity-%{version}/%{name}-%{version}-source.tar.gz
-#Source0:	https://www.fosshub.com/Audacity.html/audacity-minsrc-%{version}.tar.xz
+#Source0:  https://github.com/audacity/audacity/archive/Audacity-%{version}/%{name}-%{oname}-%{version}.tar.gz
+Source0:	https://www.fosshub.com/Audacity.html/audacity-%{version}-source.tar.gz
 Source100:	%{name}.rpmlintrc
 #Patch0:         audacity-2.4.2-default-theme-dark.patch
 #Patch1:         system-wx.patch
