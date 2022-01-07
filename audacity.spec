@@ -104,6 +104,8 @@ chmod 644 *.txt
 
 %find_lang %{name}
 
+rm -f %{buildroot}/usr/%{name}
+
 #clean uneeded installed but not packaged
 rm -rf %{buildroot}%{_docdir}/%{name}
 
@@ -119,6 +121,8 @@ desktop-file-install \
 %files -f %{name}.lang
 %doc LICENSE.txt README.txt
 %{_bindir}/*
+%{_libdir}/%{name}/lib-*
+%{_libdir}/%{name}/modules/mod-script-pipe.so
 %{_datadir}/audacity
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/audacity.*
