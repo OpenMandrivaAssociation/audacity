@@ -86,6 +86,7 @@ chmod 644 *.txt
         -DCMAKE_BUILD_TYPE=Release \
 	-Daudacity_obey_system_dependencies=ON \
 	-Daudacity_conan_enabled=off \
+	-Daudacity_use_portsmf=local \
 	-Daudacity_use_ffmpeg=loaded \
 	-Daudacity_use_lame=system \
 	-Daudacity_use_midi=system \
