@@ -1,41 +1,11 @@
---- a/cmake-proxies/wxWidgets/CMakeLists.txt~	2020-08-05 11:32:53.000000000 -0500
-+++ b/cmake-proxies/wxWidgets/CMakeLists.txt	2021-03-17 08:41:56.880061383 -0500
-@@ -237,16 +237,16 @@
-       "^#define +wxVERSION_STRING +"
- )
- 
--string( REGEX MATCHALL "\".+(Audacity).+\"" ours "${output}")
--if( NOT ours )
--   message( FATAL_ERROR
--      "\n########################################################################\n"
--      "Audacity version 3.0.0 or higher requires use of a customized version of "
--      "wxWidgets.  For details:\n"
--      "  https://wiki.audacityteam.org/wiki/Building_for_Distros\n"
--      "########################################################################\n"
--   )
--endif()
-+#string( REGEX MATCHALL "\".+(Audacity).+\"" ours "${output}")
-+#if( NOT ours )
-+#   message( FATAL_ERROR
-+#      "\n########################################################################\n"
-+#      "Audacity version 3.0.0 or higher requires use of a customized version of "
-+#      "wxWidgets.  For details:\n"
-+#      "  https://wiki.audacityteam.org/wiki/Building_for_Distros\n"
-+#      "########################################################################\n"
-+#   )
-+#endif()
- 
- target_include_directories( ${TARGET} INTERFACE ${INCLUDES} )
- target_compile_definitions( ${TARGET} INTERFACE ${DEFINES} )
-diff -up audacity-Audacity-3.0.2/cmake-proxies/cmake-modules/CopyLibs.cmake.omv~ audacity-Audacity-3.0.2/cmake-proxies/cmake-modules/CopyLibs.cmake
-diff -up audacity-Audacity-3.0.2/src/CMakeLists.txt.omv~ audacity-Audacity-3.0.2/src/CMakeLists.txt
---- audacity-Audacity-3.0.2/src/CMakeLists.txt.omv~	2021-05-06 02:47:37.790070773 +0200
-+++ audacity-Audacity-3.0.2/src/CMakeLists.txt	2021-05-06 02:48:04.848296083 +0200
-@@ -1277,17 +1277,18 @@ else()
+diff -rupN Audacity-3.1.3-Source.old/src/CMakeLists.txt Audacity-3.1.3-Source/src/CMakeLists.txt
+--- Audacity-3.1.3-Source.old/src/CMakeLists.txt	2021-12-22 16:35:57.000000000 +0100
++++ Audacity-3.1.3-Source/src/CMakeLists.txt	2021-12-24 18:45:39.691605704 +0100
+@@ -1276,17 +1276,18 @@ else()
     # Create the desktop file
     configure_file( audacity.desktop.in ${_INTDIR}/audacity.desktop )
  
-+   # Nobody in their right mind would want to
++   # *** Nobody in their right mind would want to do this ***
     # Copy the required wxWidgets libs into the bundle
 -   add_custom_command(
 -      TARGET
@@ -43,20 +13,20 @@ diff -up audacity-Audacity-3.0.2/src/CMakeLists.txt.omv~ audacity-Audacity-3.0.2
 -      COMMAND
 -         ${CMAKE_COMMAND} -D SRC="${_EXEDIR}/audacity"
 -                          -D DST="${_DEST}/${_PKGLIB}"
--                          -D WXWIN="${WXWIN}"
--                          -P ${CMAKE_MODULE_PATH}/CopyLibs.cmake
+-                          -D WXWIN="${_SHARED_PROXY_BASE_PATH}/$<CONFIG>"
+-                          -P ${AUDACITY_MODULE_PATH}/CopyLibs.cmake
 -      POST_BUILD
 -   )
-+   #   add_custom_command(
-+   #   TARGET
++   #add_custom_command(
++   #  TARGET
 +   #      ${TARGET}
-+   #   COMMAND
++   #  COMMAND
 +   #      ${CMAKE_COMMAND} -D SRC="${_EXEDIR}/audacity"
-+   #                       -D DST="${_DEST}/${_PKGLIB}"
-+   #                       -D WXWIN="${WXWIN}"
-+   #                       -P ${CMAKE_MODULE_PATH}/CopyLibs.cmake
++   #                      -D DST="${_DEST}/${_PKGLIB}"
++   #                       -D WXWIN="${_SHARED_PROXY_BASE_PATH}/$<CONFIG>"
++   #                       -P ${AUDACITY_MODULE_PATH}/CopyLibs.cmake
 +   #   POST_BUILD
 +   #)
- endif()
- 
- set_target_property_all( ${TARGET} RUNTIME_OUTPUT_NAME ${AUDACITY_NAME} )
+    
+    add_executable(findlib ../linux/findlib.c)
+    target_link_libraries(findlib ${CMAKE_DL_LIBS})
