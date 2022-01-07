@@ -92,7 +92,7 @@ chmod 644 *.txt
 	-Daudacity_use_midi=system \
 	-Daudacity_use_portsmf=local \
 %ifarch %{x86_64}
-	-Daudacity_use_sbsms=system \
+	-Daudacity_use_sbsms=local \
 %endif
 	-Daudacity_use_wxwidgets=system \
 	-G Ninja
