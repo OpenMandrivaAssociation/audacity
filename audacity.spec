@@ -84,6 +84,7 @@ chmod 644 *.txt
 # sbsms uses x86 inline assembly
 %cmake \
         -DCMAKE_BUILD_TYPE=Release \
+	-Daudacity_obey_system_dependencies=ON \
 	-Daudacity_conan_enabled=off \
 	-Daudacity_use_ffmpeg=loaded \
 	-Daudacity_use_lame=system \
