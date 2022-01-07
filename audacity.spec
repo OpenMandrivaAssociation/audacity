@@ -90,7 +90,7 @@ chmod 644 *.txt
 	-Daudacity_use_ffmpeg=loaded \
 	-Daudacity_use_lame=system \
 	-Daudacity_use_midi=system \
-	-Daudacity_use_portsmf=system \
+	-Daudacity_use_portsmf=local \
 %ifarch %{x86_64}
 	-Daudacity_use_sbsms=system \
 %endif
