@@ -121,7 +121,7 @@ desktop-file-install \
 %files -f %{name}.lang
 %doc LICENSE.txt README.txt
 %{_bindir}/*
-%{_libdir}/%{name}/lib-*
+%{_libdir}/%{name}/lib*
 %{_libdir}/%{name}/modules/mod-script-pipe.so
 %{_datadir}/audacity
 %{_datadir}/applications/%{name}.desktop
