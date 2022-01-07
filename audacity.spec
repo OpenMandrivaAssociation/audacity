@@ -122,6 +122,6 @@ desktop-file-install \
 %{_datadir}/icons/hicolor/*/apps/audacity.*
 %{_datadir}/icons/hicolor/*x*/audacity.png
 %{_datadir}/pixmaps/*
-%{_datadir}/appdata/audacity.appdata.xml
+%{_datadir}/metainfo/audacity.appdata.xml
 %{_datadir}/mime/packages/audacity.xml
 %{_mandir}/man1/audacity.1*
