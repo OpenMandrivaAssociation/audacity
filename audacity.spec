@@ -2,6 +2,7 @@
 %define oname   Audacity
 %define _disable_lto 1
 %define _disable_ld_no_undefined 1
+%global _cmake_skip_rpath %{nil}
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
@@ -85,6 +86,7 @@ chmod 644 *.txt
 # sbsms uses x86 inline assembly
 %cmake \
         -DCMAKE_BUILD_TYPE=Release \
+	-DCMAKE_SKIP_RPATH:BOOL=OFF \
 	-Daudacity_obey_system_dependencies=ON \
 	-Daudacity_conan_enabled=off \
 	-Daudacity_use_portsmf=local \
