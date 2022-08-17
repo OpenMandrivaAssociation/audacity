@@ -34,7 +34,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	atomic-devel
 BuildRequires:  portmidi-devel
-BuildRequires:	wxgtk3.2-devel
+BuildRequires:	wxwidgets
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(expat)
 BuildRequires:	pkgconfig(fftw3)
