@@ -20,6 +20,7 @@ Patch1:         system-wx.patch
 #Patch3:		audacity-workaround-clang-bug-50230.patch
 Patch4:		audacity-3.0.2-no-x86-hardcodes.patch
 Patch5:		rpath-openmandriva.patch
+Patch6:		audacity-3.1.3-wx-3.2.patch
 
 #BuildRequires:  git
 BuildRequires:	ninja
