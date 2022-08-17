@@ -7,7 +7,7 @@
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
 Version:	3.1.3
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Sound
 URL:		https://www.audacityteam.org/
@@ -34,7 +34,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	atomic-devel
 BuildRequires:  portmidi-devel
-BuildRequires:	wxgtku3.1-devel
+BuildRequires:	wxgtk3.2-devel
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(expat)
 BuildRequires:	pkgconfig(fftw3)
