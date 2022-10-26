@@ -62,6 +62,7 @@ BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:  pkgconfig(python)
 BuildRequires:  pkgconfig(portaudio-2.0)
+BuildRequires:	pkgconfig(wavpack) >= 5.2.0
 BuildRequires:	lame-devel
 BuildRequires:	pkgconfig(libmpg123)
 BuildRequires:  pkgconfig(gtk+-3.0)
