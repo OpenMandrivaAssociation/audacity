@@ -6,13 +6,13 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version:	3.1.3
-Release:	3
+Version:	3.2.1
+Release:	1
 License:	GPLv2+
 Group:		Sound
 URL:		https://www.audacityteam.org/
-#Source0:  https://github.com/audacity/audacity/archive/Audacity-%{version}/%{name}-%{oname}-%{version}.tar.gz
-Source0:	https://www.fosshub.com/Audacity.html/audacity-%{version}-source.tar.gz
+Source0:	https://github.com/audacity/audacity/releases/download/Audacity-%{version}/audacity-sources-%{version}.tar.gz
+#Source0:	https://www.fosshub.com/Audacity.html/audacity-%{version}-source.tar.gz
 Source100:	%{name}.rpmlintrc
 #Patch0:         audacity-2.4.2-default-theme-dark.patch
 Patch1:         system-wx.patch
@@ -20,7 +20,7 @@ Patch1:         system-wx.patch
 #Patch3:		audacity-workaround-clang-bug-50230.patch
 Patch4:		audacity-3.0.2-no-x86-hardcodes.patch
 Patch5:		rpath-openmandriva.patch
-Patch6:		audacity-3.1.3-wx-3.2.patch
+Patch6:		audacity-3.2.1-compile.patch
 
 #BuildRequires:  git
 BuildRequires:	ninja
@@ -79,7 +79,7 @@ It also has a built-in amplitude envelope editor, a customizable spectrogram
 mode and a frequency analysis window for audio analysis applications.
 
 %prep
-%autosetup -p1 -n %{oname}-%{fversion}-Source
+%autosetup -p1 -n audacity-sources-%{fversion}
 chmod 644 *.txt
 
 %build
@@ -95,6 +95,8 @@ chmod 644 *.txt
 	-Daudacity_use_lame=system \
 	-Daudacity_use_midi=system \
 	-Daudacity_use_portsmf=local \
+	-Daudacity_has_vst3:BOOL=OFF \
+	-DwxWidgets_CONFIG_EXECUTABLE:FILEPATH=%{_bindir}/wx-config-3.2 \
 %ifarch %{x86_64}
 	-Daudacity_use_sbsms=local \
 %endif
