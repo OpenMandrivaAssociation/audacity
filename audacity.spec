@@ -7,7 +7,7 @@
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
 Version:	3.2.3
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Sound
 URL:		https://www.audacityteam.org/
@@ -21,6 +21,7 @@ Patch1:         system-wx.patch
 Patch4:		audacity-3.0.2-no-x86-hardcodes.patch
 Patch5:		rpath-openmandriva.patch
 Patch6:		audacity-3.2.1-compile.patch
+Patch7:		audacity-non-x86.patch
 
 #BuildRequires:  git
 BuildRequires:	ninja
