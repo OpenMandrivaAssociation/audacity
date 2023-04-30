@@ -86,6 +86,8 @@ mode and a frequency analysis window for audio analysis applications.
 chmod 644 *.txt
 
 %build
+export CC=gcc
+export CXX=g++
 [ ! -f src/RevisionIdent.h ] && echo ' ' > src/RevisionIdent.h
 # sbsms uses x86 inline assembly
 %cmake \
