@@ -128,7 +128,7 @@ desktop-file-install \
         %{buildroot}%{_datadir}/applications/*
 
 %files -f %{name}.lang
-%doc LICENSE.txt README.txt
+%doc LICENSE.txt README*
 %{_bindir}/*
 %{_libdir}/%{name}/lib*
 %{_libdir}/%{name}/modules/mod-script-pipe.so
