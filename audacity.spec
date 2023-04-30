@@ -6,8 +6,8 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version:	3.2.5
-Release:	2
+Version:	3.3.1
+Release:	1
 License:	GPLv2+
 Group:		Sound
 URL:		https://www.audacityteam.org/
@@ -15,7 +15,7 @@ Source0:	https://github.com/audacity/audacity/releases/download/Audacity-%{versi
 #Source0:	https://www.fosshub.com/Audacity.html/audacity-%{version}-source.tar.gz
 Source100:	%{name}.rpmlintrc
 #Patch0:         audacity-2.4.2-default-theme-dark.patch
-Patch1:         system-wx.patch
+#Patch1:         system-wx.patch
 #Patch2:         0001-Fix-compilation-with-llvm-11.0.1.patch
 #Patch3:		audacity-workaround-clang-bug-50230.patch
 Patch4:		audacity-3.0.2-no-x86-hardcodes.patch
@@ -70,6 +70,7 @@ BuildRequires:  pkgconfig(gtk+-3.0)
 BuildRequires:  pkgconfig(gtk+-x11-3.0)
 BuildRequires:  pkgconfig(Qt5Gui)
 BuildRequires:  pkgconfig(Qt5Widgets)
+#BuildRequires:	vst3sdk
 
 %description
 Audacity is a program that lets you manipulate digital audio waveforms.
@@ -86,6 +87,9 @@ mode and a frequency analysis window for audio analysis applications.
 chmod 644 *.txt
 
 %build
+# As of Clang 16 and Audacity 3.3.1, app compiled with Clang no longer launching. No errors that would give some guess. Switch to GCC for now.
+export CC=gcc
+export CXX=g++
 [ ! -f src/RevisionIdent.h ] && echo ' ' > src/RevisionIdent.h
 # sbsms uses x86 inline assembly
 %cmake \
@@ -128,7 +132,7 @@ desktop-file-install \
         %{buildroot}%{_datadir}/applications/*
 
 %files -f %{name}.lang
-%doc LICENSE.txt README.txt
+%doc LICENSE.txt README*
 %{_bindir}/*
 %{_libdir}/%{name}/lib*
 %{_libdir}/%{name}/modules/mod-script-pipe.so

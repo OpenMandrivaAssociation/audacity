@@ -1,7 +1,16 @@
-diff -up audacity-sources-3.2.1/src/effects/RealtimeEffectState.cpp.omv~ audacity-sources-3.2.1/src/effects/RealtimeEffectState.cpp
---- audacity-sources-3.2.1/src/effects/RealtimeEffectState.cpp.omv~	2022-10-26 22:48:22.434333601 +0200
-+++ audacity-sources-3.2.1/src/effects/RealtimeEffectState.cpp	2022-10-26 22:50:32.197225244 +0200
-@@ -223,7 +223,7 @@ struct RealtimeEffectState::Access final
+diff -uraN audacity-sources-3.3.1/libraries/lib-realtime-effects/RealtimeEffectState.cpp omv-audacity-sources-3.3.1/libraries/lib-realtime-effects/RealtimeEffectState.cpp
+--- audacity-sources-3.3.1/libraries/lib-realtime-effects/RealtimeEffectState.cpp	2023-04-27 19:18:56.000000000 +0200
++++ omv-audacity-sources-3.3.1/libraries/lib-realtime-effects/RealtimeEffectState.cpp	2023-04-30 15:42:54.701877191 +0200
+@@ -278,7 +278,7 @@
+       if (auto pState = mwState.lock()) {
+          if (auto pAccessState = pState->GetAccessState()) {
+             assert(pAccessState->mMainThreadId == std::this_thread::get_id());
+-            
++
+             if (pAccessState->mState.mInitialized)
+             {
+                std::unique_lock lk(pAccessState->mLockForCV);
+@@ -303,7 +303,7 @@
        if (auto pOther = dynamic_cast<const Access*>(&other)) {
           auto &mine = mwState;
           auto &theirs = pOther->mwState;
