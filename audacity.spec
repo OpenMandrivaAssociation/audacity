@@ -70,6 +70,7 @@ BuildRequires:  pkgconfig(gtk+-3.0)
 BuildRequires:  pkgconfig(gtk+-x11-3.0)
 BuildRequires:  pkgconfig(Qt5Gui)
 BuildRequires:  pkgconfig(Qt5Widgets)
+BuildRequires:	vst3sdk
 
 %description
 Audacity is a program that lets you manipulate digital audio waveforms.
@@ -86,6 +87,7 @@ mode and a frequency analysis window for audio analysis applications.
 chmod 644 *.txt
 
 %build
+# As of Clang 16 and Audacity 3.3.1, app compiled with Clang no longer launching. No errors that would give some guess. Switch to GCC for now.
 export CC=gcc
 export CXX=g++
 [ ! -f src/RevisionIdent.h ] && echo ' ' > src/RevisionIdent.h
@@ -100,7 +102,7 @@ export CXX=g++
 	-Daudacity_use_lame=system \
 	-Daudacity_use_midi=system \
 	-Daudacity_use_portsmf=local \
-	-Daudacity_has_vst3:BOOL=OFF \
+	-Daudacity_use_vst3sdk=system \
 	-DwxWidgets_CONFIG_EXECUTABLE:FILEPATH=%{_bindir}/wx-config-3.2 \
 %ifarch %{x86_64}
 	-Daudacity_use_sbsms=local \
