@@ -20,7 +20,7 @@ Source100:	%{name}.rpmlintrc
 #Patch3:		audacity-workaround-clang-bug-50230.patch
 Patch4:		audacity-3.0.2-no-x86-hardcodes.patch
 Patch5:		rpath-openmandriva.patch
-#Patch6:		audacity-3.2.1-compile.patch
+Patch6:		audacity-3.2.1-compile.patch
 Patch7:		audacity-non-x86.patch
 
 #BuildRequires:  git
