@@ -70,7 +70,7 @@ BuildRequires:  pkgconfig(gtk+-3.0)
 BuildRequires:  pkgconfig(gtk+-x11-3.0)
 BuildRequires:  pkgconfig(Qt5Gui)
 BuildRequires:  pkgconfig(Qt5Widgets)
-BuildRequires:	vst3sdk
+#BuildRequires:	vst3sdk
 
 %description
 Audacity is a program that lets you manipulate digital audio waveforms.
@@ -102,7 +102,7 @@ export CXX=g++
 	-Daudacity_use_lame=system \
 	-Daudacity_use_midi=system \
 	-Daudacity_use_portsmf=local \
-	-Daudacity_use_vst3sdk=system \
+	-Daudacity_has_vst3:BOOL=ON \
 	-DwxWidgets_CONFIG_EXECUTABLE:FILEPATH=%{_bindir}/wx-config-3.2 \
 %ifarch %{x86_64}
 	-Daudacity_use_sbsms=local \
