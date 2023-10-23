@@ -70,6 +70,7 @@ BuildRequires:  pkgconfig(gtk+-3.0)
 BuildRequires:  pkgconfig(gtk+-x11-3.0)
 BuildRequires:  pkgconfig(Qt5Gui)
 BuildRequires:  pkgconfig(Qt5Widgets)
+BuildRequires:	pkgconfig(RapidJSON)
 #BuildRequires:	vst3sdk
 
 %description
