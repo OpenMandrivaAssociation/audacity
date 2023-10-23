@@ -137,7 +137,7 @@ desktop-file-install \
 %doc LICENSE.txt README*
 %{_bindir}/*
 %{_libdir}/%{name}/lib*
-%{_libdir}/%{name}/modules/mod-script-pipe.so
+%{_libdir}/audacity/modules/mod*
 %{_datadir}/audacity
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/audacity.*
