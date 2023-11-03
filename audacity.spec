@@ -89,9 +89,9 @@ mode and a frequency analysis window for audio analysis applications.
 chmod 644 *.txt
 
 %build
-# As of Clang 16 and Audacity 3.3.1, app compiled with Clang no longer launching. No errors that would give some guess. Switch to GCC for now.
-#export CC=gcc
-#export CXX=g++
+# As of Clang 16 & 17 and Audacity 3.3.1 % 3.4.0, app compiled with Clang no longer launching. No errors that would give some guess. Switch to GCC for now.
+export CC=gcc
+export CXX=g++
 [ ! -f src/RevisionIdent.h ] && echo ' ' > src/RevisionIdent.h
 # sbsms uses x86 inline assembly
 %cmake \
