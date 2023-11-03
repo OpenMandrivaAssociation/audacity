@@ -6,7 +6,7 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version:	3.3.3
+Version:	3.4.0
 Release:	1
 License:	GPLv2+
 Group:		Sound
@@ -46,6 +46,7 @@ BuildRequires:	pkgconfig(jack)
 BuildRequires:  pkgconfig(lv2)
 BuildRequires:	pkgconfig(mad)
 BuildRequires:	pkgconfig(opus)
+BuildRequires:	pkgconfig(opusfile)
 BuildRequires:	pkgconfig(ogg)
 BuildRequires:	pkgconfig(samplerate)
 BuildRequires:	pkgconfig(sndfile)
@@ -70,6 +71,7 @@ BuildRequires:  pkgconfig(gtk+-3.0)
 BuildRequires:  pkgconfig(gtk+-x11-3.0)
 BuildRequires:  pkgconfig(Qt5Gui)
 BuildRequires:  pkgconfig(Qt5Widgets)
+BuildRequires:	pkgconfig(RapidJSON)
 #BuildRequires:	vst3sdk
 
 %description
@@ -87,7 +89,7 @@ mode and a frequency analysis window for audio analysis applications.
 chmod 644 *.txt
 
 %build
-# As of Clang 16 and Audacity 3.3.1, app compiled with Clang no longer launching. No errors that would give some guess. Switch to GCC for now.
+# As of Clang 16 & 17 and Audacity 3.3.1 % 3.4.0, app compiled with Clang no longer launching. No errors that would give some guess. Switch to GCC for now.
 export CC=gcc
 export CXX=g++
 [ ! -f src/RevisionIdent.h ] && echo ' ' > src/RevisionIdent.h
@@ -135,7 +137,7 @@ desktop-file-install \
 %doc LICENSE.txt README*
 %{_bindir}/*
 %{_libdir}/%{name}/lib*
-%{_libdir}/%{name}/modules/mod-script-pipe.so
+%{_libdir}/audacity/modules/mod*
 %{_datadir}/audacity
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/audacity.*
