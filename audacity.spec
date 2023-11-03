@@ -7,11 +7,11 @@
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
 Version:	3.4.0
-Release:	0.beta.1.0
+Release:	1
 License:	GPLv2+
 Group:		Sound
 URL:		https://www.audacityteam.org/
-Source0:	https://github.com/audacity/audacity/releases/download/Audacity-%{version}/audacity-sources-%{version}-beta-1.tar.gz
+Source0:	https://github.com/audacity/audacity/releases/download/Audacity-%{version}/audacity-sources-%{version}.tar.gz
 #Source0:	https://www.fosshub.com/Audacity.html/audacity-%{version}-source.tar.gz
 Source100:	%{name}.rpmlintrc
 #Patch0:         audacity-2.4.2-default-theme-dark.patch
@@ -85,7 +85,7 @@ It also has a built-in amplitude envelope editor, a customizable spectrogram
 mode and a frequency analysis window for audio analysis applications.
 
 %prep
-%autosetup -p1 -n audacity-sources-%{fversion}-beta-1
+%autosetup -p1 -n audacity-sources-%{fversion}
 chmod 644 *.txt
 
 %build
