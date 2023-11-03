@@ -1,0 +1,12 @@
+diff -up audacity-sources-3.4.0/libraries/lib-time-and-pitch/StaffPad/SimdTypes_neon.h.omv~ audacity-sources-3.4.0/libraries/lib-time-and-pitch/StaffPad/SimdTypes_neon.h
+--- audacity-sources-3.4.0/libraries/lib-time-and-pitch/StaffPad/SimdTypes_neon.h.omv~	2023-11-03 15:30:44.733975392 +0000
++++ audacity-sources-3.4.0/libraries/lib-time-and-pitch/StaffPad/SimdTypes_neon.h	2023-11-03 15:45:02.035319956 +0000
+@@ -45,7 +45,7 @@ struct float_x4
+     s.n128_f32[2] = v2;
+     s.n128_f32[3] = v3;
+ #else
+-    s = {v0, v1, v2, v3};
++    s = float32x4_t{v0, v1, v2, v3};
+ #endif
+   }
+ 
