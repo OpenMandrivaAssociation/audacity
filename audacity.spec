@@ -1,18 +1,22 @@
-%define fversion %{version}
 %define oname   Audacity
 %define _disable_lto 1
 %define _disable_ld_no_undefined 1
 %global _cmake_skip_rpath %{nil}
+%global optflags %{optflags} -fPIC
+%define gitdate 20240421
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version:	3.4.2
-Release:	2
+Version:	3.5.0
+Release:	%{?gitdate:0.%{gitdate}.}1
 License:	GPLv2+
 Group:		Sound
 URL:		https://www.audacityteam.org/
-Source0:	https://github.com/audacity/audacity/releases/download/Audacity-%{version}/audacity-sources-%{version}.tar.gz
-#Source0:	https://www.fosshub.com/Audacity.html/audacity-%{version}-source.tar.gz
+%if ! 0%{?gitdate:1}
+Source0:	https://www.fosshub.com/Audacity.html/audacity-%{version}-source.tar.gz
+%else
+Source0:	https://github.com/audacity/audacity/archive/refs/heads/master.tar.gz#/%{name}-%{gitdate}.tar.gz
+%endif
 Source100:	%{name}.rpmlintrc
 #Patch0:         audacity-2.4.2-default-theme-dark.patch
 #Patch1:         system-wx.patch
@@ -23,6 +27,7 @@ Patch4:		audacity-3.0.2-no-x86-hardcodes.patch
 Patch5:		rpath-openmandriva.patch
 Patch6:		audacity-3.2.1-compile.patch
 Patch7:		audacity-non-x86.patch
+Patch8:		https://github.com/audacity/audacity/pull/6241.patch
 
 #BuildRequires:  git
 BuildRequires:	ninja
@@ -86,7 +91,7 @@ It also has a built-in amplitude envelope editor, a customizable spectrogram
 mode and a frequency analysis window for audio analysis applications.
 
 %prep
-%autosetup -p1 -n audacity-sources-%{fversion}
+%autosetup -p1 -n audacity%{?gitdate:-master}%{!?gitdate:-source-%{version}}
 chmod 644 *.txt
 
 %build
