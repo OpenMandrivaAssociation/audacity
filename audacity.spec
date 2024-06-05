@@ -3,7 +3,7 @@
 %define _disable_ld_no_undefined 1
 %global _cmake_skip_rpath %{nil}
 %global optflags %{optflags} -fPIC
-%define gitdate 20240421
+%define gitdate 20240605
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
@@ -25,9 +25,7 @@ Source100:	%{name}.rpmlintrc
 Patch3:		audacity-3.4.0-fix-build.patch
 Patch4:		audacity-3.0.2-no-x86-hardcodes.patch
 Patch5:		rpath-openmandriva.patch
-Patch6:		audacity-3.2.1-compile.patch
 Patch7:		audacity-non-x86.patch
-Patch8:		https://github.com/audacity/audacity/pull/6241.patch
 
 #BuildRequires:  git
 BuildRequires:	ninja
@@ -103,6 +101,7 @@ export CXX=g++
 %cmake \
         -DCMAKE_BUILD_TYPE=Release \
 	-DCMAKE_SKIP_RPATH:BOOL=OFF \
+	-Daudacity_use_pch:BOOL=OFF \
 	-Daudacity_obey_system_dependencies=ON \
 	-Daudacity_conan_enabled=off \
 	-Daudacity_use_portsmf=local \
