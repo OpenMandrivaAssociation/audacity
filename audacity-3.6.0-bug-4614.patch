@@ -1,0 +1,13 @@
+diff -up audacity-Audacity-3.6.0/src/ListNavigationPanel.cpp.omv~ audacity-Audacity-3.6.0/src/ListNavigationPanel.cpp
+diff -up audacity-Audacity-3.6.0/src/ListNavigationPanel.h.omv~ audacity-Audacity-3.6.0/src/ListNavigationPanel.h
+--- audacity-Audacity-3.6.0/src/ListNavigationPanel.h.omv~	2024-07-16 23:03:08.817307848 +0200
++++ audacity-Audacity-3.6.0/src/ListNavigationPanel.h	2024-07-16 23:04:35.974554606 +0200
+@@ -13,7 +13,7 @@
+ #include <wx/window.h>
+ #include <wx/containr.h>
+ 
+-#if !defined(__FreeBSD__) && !defined(__OpenBSD__)
++#if !defined(__clang__)
+ extern template class WXDLLIMPEXP_CORE wxNavigationEnabled<wxWindow>;
+ #endif
+ 

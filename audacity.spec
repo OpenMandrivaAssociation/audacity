@@ -3,17 +3,17 @@
 %define _disable_ld_no_undefined 1
 %global _cmake_skip_rpath %{nil}
 %global optflags %{optflags} -fPIC
-%define gitdate 20240605
+#define gitdate 20240605
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version:	3.5.0
-Release:	%{?gitdate:0.%{gitdate}.}2
+Version:	3.6.0
+Release:	%{?gitdate:0.%{gitdate}.}1
 License:	GPLv2+
 Group:		Sound
 URL:		https://www.audacityteam.org/
 %if ! 0%{?gitdate:1}
-Source0:	https://www.fosshub.com/Audacity.html/audacity-%{version}-source.tar.gz
+Source0:	https://github.com/audacity/audacity/archive/refs/tags/Audacity-%{version}.tar.gz
 %else
 Source0:	https://github.com/audacity/audacity/archive/refs/heads/master.tar.gz#/%{name}-%{gitdate}.tar.gz
 %endif
@@ -25,6 +25,7 @@ Source100:	%{name}.rpmlintrc
 Patch3:		audacity-3.4.0-fix-build.patch
 Patch4:		audacity-3.0.2-no-x86-hardcodes.patch
 Patch5:		rpath-openmandriva.patch
+Patch6:		audacity-3.6.0-bug-4614.patch
 Patch7:		audacity-non-x86.patch
 
 #BuildRequires:  git
@@ -89,11 +90,11 @@ It also has a built-in amplitude envelope editor, a customizable spectrogram
 mode and a frequency analysis window for audio analysis applications.
 
 %prep
-%autosetup -p1 -n audacity%{?gitdate:-master}%{!?gitdate:-source-%{version}}
+%autosetup -p1 -n audacity%{?gitdate:-master}%{!?gitdate:-Audacity-%{version}}
 chmod 644 *.txt
 
 %build
-# As of Clang 16 & 17 and Audacity 3.3.1 % 3.4.0, app compiled with Clang no longer launching. No errors that would give some guess. Switch to GCC for now.
+# As of Clang 18 and Audacity 3.6.0, app compiled with Clang no longer launching. No errors that would give some guess. Switch to GCC for now.
 export CC=gcc
 export CXX=g++
 [ ! -f src/RevisionIdent.h ] && echo ' ' > src/RevisionIdent.h
