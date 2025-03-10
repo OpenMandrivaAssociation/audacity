@@ -7,13 +7,13 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version:	3.7.1
-Release:	%{?gitdate:0.%{gitdate}.}2
+Version:	3.7.2
+Release:	%{?gitdate:0.%{gitdate}.}1
 License:	GPLv2+
 Group:		Sound
 URL:		https://www.audacityteam.org/
 %if ! 0%{?gitdate:1}
-Source0:	https://github.com/audacity/audacity/archive/refs/tags/Audacity-%{version}.tar.gz
+Source0:	https://github.com/audacity/audacity/archive/%{name}-Audacity-%{version}.tar.gz
 %else
 Source0:	https://github.com/audacity/audacity/archive/refs/heads/master.tar.gz#/%{name}-%{gitdate}.tar.gz
 %endif
