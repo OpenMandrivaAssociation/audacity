@@ -1,0 +1,49 @@
+diff -up audacity-Audacity-3.7.3/cmake-proxies/cmake-modules/AudacityFunctions.cmake.omv~ audacity-Audacity-3.7.3/cmake-proxies/cmake-modules/AudacityFunctions.cmake
+diff -up audacity-Audacity-3.7.3/cmake-proxies/cmake-modules/dependencies/rapidjson.cmake.omv~ audacity-Audacity-3.7.3/cmake-proxies/cmake-modules/dependencies/rapidjson.cmake
+--- audacity-Audacity-3.7.3/cmake-proxies/cmake-modules/dependencies/rapidjson.cmake.omv~	2025-04-17 18:07:50.343776850 +0200
++++ audacity-Audacity-3.7.3/cmake-proxies/cmake-modules/dependencies/rapidjson.cmake	2025-04-17 18:09:03.738325897 +0200
+@@ -3,7 +3,7 @@
+ if(NOT ${_OPT}use_rapidjson STREQUAL "off")
+    if(NOT TARGET rapidjson::rapidjson)
+       if(TARGET rapidjson)
+-         add_library( rapidjson::rapidjson ALIAS rapidjson )
++         #add_library( rapidjson::rapidjson ALIAS rapidjson )
+       else()
+          # At least on Arch RapidJSONConfig.cmake does not define a target at all
+          # so we have to do it ourselves
+diff -up audacity-Audacity-3.7.3/libraries/lib-import-export/CMakeLists.txt.omv~ audacity-Audacity-3.7.3/libraries/lib-import-export/CMakeLists.txt
+--- audacity-Audacity-3.7.3/libraries/lib-import-export/CMakeLists.txt.omv~	2025-04-17 18:10:10.211366691 +0200
++++ audacity-Audacity-3.7.3/libraries/lib-import-export/CMakeLists.txt	2025-04-17 18:10:14.025834361 +0200
+@@ -42,7 +42,7 @@ set( SOURCES
+    PlainExportOptionsEditor.h
+ )
+ set( LIBRARIES
+-   rapidjson::rapidjson
++   rapidjson
+    lib-tags-interface
+    lib-wave-track-interface
+    lib-project-interface
+diff -up audacity-Audacity-3.7.3/libraries/lib-musehub/CMakeLists.txt.omv~ audacity-Audacity-3.7.3/libraries/lib-musehub/CMakeLists.txt
+--- audacity-Audacity-3.7.3/libraries/lib-musehub/CMakeLists.txt.omv~	2025-04-17 18:10:20.818546403 +0200
++++ audacity-Audacity-3.7.3/libraries/lib-musehub/CMakeLists.txt	2025-04-17 18:10:23.338082738 +0200
+@@ -8,7 +8,7 @@ set( SOURCES
+ )
+ set( LIBRARIES
+    lib-network-manager-interface
+-   rapidjson::rapidjson
++   rapidjson
+ )
+ 
+ audacity_library( lib-musehub "${SOURCES}" "${LIBRARIES}"
+diff -up audacity-Audacity-3.7.3/libraries/lib-sentry-reporting/CMakeLists.txt.omv~ audacity-Audacity-3.7.3/libraries/lib-sentry-reporting/CMakeLists.txt
+--- audacity-Audacity-3.7.3/libraries/lib-sentry-reporting/CMakeLists.txt.omv~	2025-04-17 18:10:29.988703757 +0200
++++ audacity-Audacity-3.7.3/libraries/lib-sentry-reporting/CMakeLists.txt	2025-04-17 18:10:33.219960090 +0200
+@@ -27,7 +27,7 @@ if(${_OPT}has_sentry_reporting)
+         lib-network-manager # Required for the networking
+         lib-string-utils # ToUtf8
+         lib-uuid # UUIDs are required as an event identifier.
+-        rapidjson::rapidjson # Protocol is JSON based
++        rapidjson # Protocol is JSON based
+         wxBase # Required to retrieve the OS information
+     )
+ 
