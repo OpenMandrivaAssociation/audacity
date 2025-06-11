@@ -28,6 +28,8 @@ Patch5:		rpath-openmandriva.patch
 Patch6:		audacity-3.6.0-bug-4614.patch
 Patch7:		audacity-non-x86.patch
 Patch8:		audacity-rapidjson-1.2.patch
+# fix for GCC 15.1
+Patch9:		https://github.com/loqs/audacity/commit/a12adf3c291f68a0316fa3672241a69d3f280375.patch
 
 #BuildRequires:  git
 BuildRequires:	ninja
