@@ -7,8 +7,8 @@
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version:	3.7.5
-Release:	%{?gitdate:0.%{gitdate}.}2
+Version:	3.7.6
+Release:	%{?gitdate:0.%{gitdate}.}6
 License:	GPLv2+
 Group:		Sound
 URL:		https://www.audacityteam.org/
@@ -28,7 +28,7 @@ Patch5:		rpath-openmandriva.patch
 Patch6:		audacity-3.6.0-bug-4614.patch
 Patch7:		audacity-non-x86.patch
 Patch8:		audacity-rapidjson-1.2.patch
-Patch9:		https://github.com/audacity/audacity/commit/67744a887b79c84f1698a0189d75ee2ce760d117.patch
+#Patch9:		https://github.com/audacity/audacity/commit/67744a887b79c84f1698a0189d75ee2ce760d117.patch
 
 #BuildRequires:  git
 BuildRequires:	ninja
