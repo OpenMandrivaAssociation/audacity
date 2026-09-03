@@ -1,0 +1,117 @@
+diff -up audacity-4.0.0/src/importexport/export/view/metadatamodel.cpp.omv~ audacity-4.0.0/src/importexport/export/view/metadatamodel.cpp
+--- audacity-4.0.0/src/importexport/export/view/metadatamodel.cpp.omv~	2026-09-03 00:00:00.000000000 +0000
++++ audacity-4.0.0/src/importexport/export/view/metadatamodel.cpp	2026-09-03 00:00:00.000000000 +0000
+@@ -33,7 +33,7 @@
+     if (row < int(kStdTags.size())) {
+         // Standard tags
+         if (role == RoleTag) {
+-            return QString::fromStdString(project::LABEL_MAP[kStdTags[row]]);
++            return muse::qtrc("metadata", project::LABEL_MAP.at(kStdTags[row]).c_str());
+         }
+         if (role == RoleValue) {
+             return QString::fromStdString(m_meta.*(project::kStdMembers[row]));
+diff -up audacity-4.0.0/src/importexport/export/view/metadatamodel.h.omv~ audacity-4.0.0/src/importexport/export/view/metadatamodel.h
+--- audacity-4.0.0/src/importexport/export/view/metadatamodel.h.omv~	2026-09-03 00:00:00.000000000 +0000
++++ audacity-4.0.0/src/importexport/export/view/metadatamodel.h	2026-09-03 00:00:00.000000000 +0000
+@@ -64,13 +64,13 @@
+ private:
+     inline static const std::array<std::string, 6> kStdTags =
+     {
+-        muse::trc("metadata", "TITLE"),
+-        muse::trc("metadata", "ARTIST"),
+-        muse::trc("metadata", "ALBUM"),
+-        muse::trc("metadata", "TRACKNUMBER"),
+-        muse::trc("metadata", "YEAR"),
+-        // muse::trc("metadata", "GENRE"),
+-        muse::trc("metadata", "COMMENTS")
++        project::TITLE_TAG,
++        project::ARTIST_TAG,
++        project::ALBUM_TAG,
++        project::TRACK_NUMBER_TAG,
++        project::YEAR_TAG,
++        // project::GENRE_TAG,
++        project::COMMENTS_TAG
+     };
+ 
+     project::ProjectMeta m_meta;
+diff -up audacity-4.0.0/src/project/internal/au3/au3metadata.h.omv~ audacity-4.0.0/src/project/internal/au3/au3metadata.h
+--- audacity-4.0.0/src/project/internal/au3/au3metadata.h.omv~	2026-09-03 00:00:00.000000000 +0000
++++ audacity-4.0.0/src/project/internal/au3/au3metadata.h	2026-09-03 00:00:00.000000000 +0000
+@@ -34,13 +34,13 @@
+ private:
+     inline static const std::array<std::string, 6> kStdTags =
+     {
+-        muse::trc("metadata", "TITLE"),
+-        muse::trc("metadata", "ARTIST"),
+-        muse::trc("metadata", "ALBUM"),
+-        muse::trc("metadata", "TRACKNUMBER"),
+-        muse::trc("metadata", "YEAR"),
+-        // muse::trc("metadata", "GENRE"), // TODO
+-        muse::trc("metadata", "COMMENTS"),
++        TITLE_TAG,
++        ARTIST_TAG,
++        ALBUM_TAG,
++        TRACK_NUMBER_TAG,
++        YEAR_TAG,
++        // GENRE_TAG, // TODO
++        COMMENTS_TAG,
+     };
+ };
+ }
+diff -up audacity-4.0.0/src/project/types/projectmeta.h.omv~ audacity-4.0.0/src/project/types/projectmeta.h
+--- audacity-4.0.0/src/project/types/projectmeta.h.omv~	2026-09-03 00:00:00.000000000 +0000
++++ audacity-4.0.0/src/project/types/projectmeta.h	2026-09-03 00:00:00.000000000 +0000
+@@ -63,16 +63,19 @@
+ 
+ using ProjectMetaList = QList<ProjectMeta>;
+ 
+-// Tags
+-inline const std::string TITLE_TAG("TITLE");
+-inline const std::string ARTIST_TAG("ARTIST");
+-inline const std::string ALBUM_TAG("ALBUM");
+-inline const std::string TRACK_NUMBER_TAG("TRACKNUMBER");
+-inline const std::string YEAR_TAG("YEAR");
+-// inline const std::string GENRE_TAG("GENRE"); // TODO
+-inline const std::string COMMENTS_TAG("COMMENTS");
++// Tags. These must be constant-initialized: a header-scope QList/map
++// that copies inline std::string objects can run before those strings'
++// constructors (clang + LTO), and libstdc++ then copies 1 byte from a
++// null data pointer.
++inline constexpr const char TITLE_TAG[] = "TITLE";
++inline constexpr const char ARTIST_TAG[] = "ARTIST";
++inline constexpr const char ALBUM_TAG[] = "ALBUM";
++inline constexpr const char TRACK_NUMBER_TAG[] = "TRACKNUMBER";
++inline constexpr const char YEAR_TAG[] = "YEAR";
++// inline constexpr const char GENRE_TAG[] = "GENRE"; // TODO
++inline constexpr const char COMMENTS_TAG[] = "COMMENTS";
+ 
+-static const QList<std::string> standardTags {
++inline const QList<std::string> standardTags {
+     TITLE_TAG,
+     ARTIST_TAG,
+     ALBUM_TAG,
+@@ -94,14 +97,16 @@
+     &project::ProjectMeta::comments,
+ };
+ 
+-static std::map<std::string, std::string> LABEL_MAP {
+-    { ARTIST_TAG,       muse::trc("metadata", "Artist name") },
+-    { TITLE_TAG,        muse::trc("metadata", "Track title") },
+-    { ALBUM_TAG,        muse::trc("metadata", "Album title") },
+-    { TRACK_NUMBER_TAG, muse::trc("metadata", "Track number") },
+-    // { GENRE_TAG,        muse::trc("metadata", "Genre") }, // TODO
+-    { YEAR_TAG,         muse::trc("metadata", "Year") },
+-    { COMMENTS_TAG,     muse::trc("metadata", "Comments") },
++// English source strings only. Translate at the use site (muse::trc is
++// not safe during dynamic initialization, before QCoreApplication).
++inline const std::map<std::string, std::string> LABEL_MAP {
++    { ARTIST_TAG,       "Artist name" },
++    { TITLE_TAG,        "Track title" },
++    { ALBUM_TAG,        "Album title" },
++    { TRACK_NUMBER_TAG, "Track number" },
++    // { GENRE_TAG,        "Genre" }, // TODO
++    { YEAR_TAG,         "Year" },
++    { COMMENTS_TAG,     "Comments" },
+ };
+ 
+ // Cloud-related tags

@@ -1,4 +1,11 @@
 %define _disable_ld_no_undefined 1
+# Muse/Audacity 4 headers construct maps and QLists at namespace scope
+# (inline std::string tags, ID_STRINGS, GENERIC_SETUP_DATA, ...). Clang
+# LTO reorders those constructors across TUs, so one static copies or
+# looks up another before it exists. First crash was SIGSEGV in
+# projectmeta.h; with that patched, startup still aborts in
+# muse::mpe::soundIdToString (unordered_map::at on an empty ID_STRINGS).
+%define _disable_lto 1
 # -pthread must be on the PCH as well; wx-config adds it later and Clang
 # rejects a PCH that was built without POSIX thread support.
 %global optflags %{optflags} -fPIC -pthread
@@ -11,7 +18,7 @@
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
 Version:	4.0.0
-Release:	1
+Release:	2
 License:	GPLv3
 Group:		Sound
 URL:		https://www.audacityteam.org/
@@ -23,6 +30,8 @@ Patch0:		audacity-4.0.0-neon-clang.patch
 Patch1:		audacity-4.0.0-desktop-name.patch
 # qt_standard_project_setup SUPPORTS_UP_TO 6.10 warns on cooker Qt 6.11
 Patch2:		audacity-4.0.0-qt-6.11.patch
+# Header-scope std::string / muse::trc statics crash before main with clang+LTO
+Patch3:		audacity-4.0.0-static-init.patch
 
 BuildSystem:	cmake
 # Official snapshot ships dependency sources in offline-deps/ (no network at build time)
