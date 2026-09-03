@@ -1,85 +1,103 @@
-%define oname   Audacity
-%define _disable_lto 1
 %define _disable_ld_no_undefined 1
-%global _cmake_skip_rpath %{nil}
-%global optflags %{optflags} -fPIC
-#define gitdate 20240605
+# -pthread must be on the PCH as well; wx-config adds it later and Clang
+# rejects a PCH that was built without POSIX thread support.
+%global optflags %{optflags} -fPIC -pthread
+# Upstream installs resources under share/audacity-MAJOR.MINOR
+%define majmin %(echo %{version}|cut -d. -f1-2)
+# Official tarball already unpacks as audacity-VERSION/; default %%autosetup -C
+# would nest that as audacity-VERSION/audacity-VERSION/
+%define buildsystem_cmake_prep() %autosetup -p1 -n %{name}-%{version}
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
-Version:	3.7.9
-Release:	%{?gitdate:0.%{gitdate}.}1
-License:	GPLv2+
+Version:	4.0.0
+Release:	1
+License:	GPLv3
 Group:		Sound
 URL:		https://www.audacityteam.org/
-%if ! 0%{?gitdate:1}
-Source0:	https://github.com/audacity/audacity/archive/%{name}-Audacity-%{version}.tar.gz
-%else
-Source0:	https://github.com/audacity/audacity/archive/refs/heads/master.tar.gz#/%{name}-%{gitdate}.tar.gz
-%endif
+Source0:	https://github.com/audacity/audacity/releases/download/Audacity-%{version}/audacity-sources-%{version}.tar.xz
 Source100:	%{name}.rpmlintrc
-#Patch0:         audacity-2.4.2-default-theme-dark.patch
-#Patch1:         system-wx.patch
-#Patch2:         0001-Fix-compilation-with-llvm-11.0.1.patch
-#Patch3:		audacity-workaround-clang-bug-50230.patch
-Patch3:		audacity-3.4.0-fix-build.patch
-Patch4:		audacity-3.0.2-no-x86-hardcodes.patch
-Patch5:		rpath-openmandriva.patch
-Patch6:		audacity-3.6.0-bug-4614.patch
-Patch7:		audacity-non-x86.patch
-#Patch8:		audacity-rapidjson-1.2.patch
-#Patch9:		https://github.com/audacity/audacity/commit/67744a887b79c84f1698a0189d75ee2ce760d117.patch
+# Clang rejects the NEON float32x4_t aggregate init used by StaffPad
+Patch0:		audacity-4.0.0-neon-clang.patch
+# Upstream desktop Name is always "... Portable" (AppImage leftover)
+Patch1:		audacity-4.0.0-desktop-name.patch
+# qt_standard_project_setup SUPPORTS_UP_TO 6.10 warns on cooker Qt 6.11
+Patch2:		audacity-4.0.0-qt-6.11.patch
 
-#BuildRequires:  git
-BuildRequires:	ninja
-BuildRequires:  cmake
+BuildSystem:	cmake
+# Official snapshot ships dependency sources in offline-deps/ (no network at build time)
+BuildOption:	-DEXTDEPS_CACHE=%{_builddir}/%{name}-%{version}/offline-deps
+# Use system copies of expat/flac/portaudio/wxBase/...; in-tree source-only
+# deps (Nyquist, VST3 SDK, LV2, soxr, sbsms, ...) still rebuild from offline-deps
+BuildOption:	-DEXTDEPS_OVERRIDE_ALL=SYSTEM
+BuildOption:	-DAU4_BUILD_MODE=release
+BuildOption:	-DAU4_BUILD_CONFIGURATION=app
+BuildOption:	-DMUSE_ENABLE_UNIT_TESTS:BOOL=OFF
+BuildOption:	-DMUSE_MODULE_DIAGNOSTICS_CRASHPAD_CLIENT:BOOL=OFF
+BuildOption:	-DMUSE_MODULE_UPDATE:BOOL=OFF
+BuildOption:	-DAU_BUILD_USAGEINFO_MODULE:BOOL=OFF
+BuildOption:	-DAU_USE_SBSMS:BOOL=ON
+BuildOption:	-DAU_USE_SOUNDTOUCH:BOOL=ON
+
 BuildRequires:	desktop-file-utils
-BuildRequires:	imagemagick
-BuildRequires:  lame-devel
-#for compressing the help file:
-BuildRequires:	zip
-BuildRequires:	ffmpeg-devel
-BuildRequires:	gettext-devel
-BuildRequires:	jpeg-devel
+# Needed at build time so we can symlink the catalogues the app loads from its locale dir
+BuildRequires:	qt6-qttranslations
 BuildRequires:	atomic-devel
-BuildRequires:  portmidi-devel
-BuildRequires:	libwxgtk3.2-devel
+BuildRequires:	ffmpeg-devel
+# au3 still links wxBase only. Cooker wxQt 3.2 is built against Qt 5 and would
+# pull Qt5Core into this Qt 6 app; wxGTK's wx-config --libs base is just libwx_baseu.
+BuildRequires:	wxgtk-devel
+BuildRequires:	cmake(Qt6Core)
+BuildRequires:	cmake(Qt6Gui)
+BuildRequires:	cmake(Qt6CorePrivate)
+BuildRequires:	cmake(Qt6GuiPrivate)
+BuildRequires:	cmake(Qt6Widgets)
+BuildRequires:	cmake(Qt6Network)
+BuildRequires:	cmake(Qt6NetworkAuth)
+BuildRequires:	cmake(Qt6Qml)
+BuildRequires:	cmake(Qt6Quick)
+BuildRequires:	cmake(Qt6QuickControls2)
+BuildRequires:	cmake(Qt6QuickWidgets)
+BuildRequires:	cmake(Qt6Svg)
+BuildRequires:	cmake(Qt6Xml)
+BuildRequires:	cmake(Qt6DBus)
+BuildRequires:	cmake(Qt6Concurrent)
+BuildRequires:	cmake(Qt6PrintSupport)
+BuildRequires:	cmake(Qt6ShaderTools)
+BuildRequires:	cmake(Qt6Core5Compat)
+BuildRequires:	cmake(Qt6LinguistTools)
+BuildRequires:	cmake(Qt6StateMachine)
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(expat)
-BuildRequires:	pkgconfig(fftw3)
+BuildRequires:	pkgconfig(flac)
 BuildRequires:	pkgconfig(flac++)
-BuildRequires:	pkgconfig(id3tag)
+BuildRequires:	pkgconfig(freetype2)
+BuildRequires:	pkgconfig(gl)
+BuildRequires:	pkgconfig(harfbuzz)
 BuildRequires:	pkgconfig(jack)
-BuildRequires:  pkgconfig(lv2)
-BuildRequires:	pkgconfig(mad)
+BuildRequires:	pkgconfig(libmpg123)
+BuildRequires:	pkgconfig(libpng)
+BuildRequires:	pkgconfig(libudev)
+BuildRequires:	pkgconfig(ogg)
 BuildRequires:	pkgconfig(opus)
 BuildRequires:	pkgconfig(opusfile)
-BuildRequires:	pkgconfig(ogg)
-BuildRequires:	pkgconfig(samplerate)
+BuildRequires:	pkgconfig(portaudio-2.0)
 BuildRequires:	pkgconfig(sndfile)
-BuildRequires:	pkgconfig(soundtouch)
-BuildRequires:	pkgconfig(speex)
-BuildRequires:  pkgconfig(soxr)
-BuildRequires:	pkgconfig(suil-0)
-BuildRequires:	pkgconfig(lilv-0)
-BuildRequires:	pkgconfig(serd-0)
-BuildRequires:	pkgconfig(sord-0)
-BuildRequires:	pkgconfig(sratom-0)
-BuildRequires:	pkgconfig(twolame)
-BuildRequires:	pkgconfig(vamp-sdk)
 BuildRequires:	pkgconfig(vorbis)
-BuildRequires:	pkgconfig(zlib)
-BuildRequires:  pkgconfig(python)
-BuildRequires:  pkgconfig(portaudio-2.0)
 BuildRequires:	pkgconfig(wavpack) >= 5.2.0
+BuildRequires:	pkgconfig(xkbcommon)
+BuildRequires:	pkgconfig(zlib)
 BuildRequires:	lame-devel
-BuildRequires:	pkgconfig(libmpg123)
-BuildRequires:  pkgconfig(gtk+-3.0)
-BuildRequires:  pkgconfig(gtk+-x11-3.0)
-BuildRequires:  pkgconfig(Qt5Gui)
-BuildRequires:  pkgconfig(Qt5Widgets)
-BuildRequires:	pkgconfig(RapidJSON)
-#BuildRequires:	vst3sdk
+
+# QML modules are loaded at runtime, not via ELF DT_NEEDED
+Requires:	qt6-qtdeclarative
+Requires:	qt6-qt5compat
+Requires:	qt6-qtsvg
+Requires:	qt6-qtimageformats
+Requires:	qt6-qtshadertools
+Requires:	qt6-qtnetworkauth
+# Symlinked into share/audacity-%%{majmin}/locale (the app does not search the system Qt path)
+Requires:	qt6-qttranslations
 
 %description
 Audacity is a program that lets you manipulate digital audio waveforms.
@@ -91,66 +109,38 @@ it will mix tracks and let you apply plug-in effects to any part of a sound.
 It also has a built-in amplitude envelope editor, a customizable spectrogram
 mode and a frequency analysis window for audio analysis applications.
 
-%prep
-%autosetup -p1 -n audacity%{?gitdate:-master}%{!?gitdate:-Audacity-%{version}}
-chmod 644 *.txt
+Audacity 4 rebuilds the interface on Qt 6. The audio engine is still the
+Audacity 3 codebase, wrapped for the new frontend.
 
-%build
-# As of Clang 18 and Audacity 3.6.0, app compiled with Clang no longer launching. No errors that would give some guess. Switch to GCC for now.
-export CC=gcc
-export CXX=g++
-[ ! -f src/RevisionIdent.h ] && echo ' ' > src/RevisionIdent.h
-# sbsms uses x86 inline assembly
-%cmake \
-        -DCMAKE_BUILD_TYPE=Release \
-	-DCMAKE_SKIP_RPATH:BOOL=OFF \
-	-Daudacity_use_pch:BOOL=OFF \
-	-Daudacity_obey_system_dependencies=ON \
-	-Daudacity_conan_enabled=off \
-	-Daudacity_use_portsmf=local \
-	-Daudacity_use_ffmpeg=loaded \
-	-Daudacity_use_lame=system \
-	-Daudacity_use_midi=system \
-	-Daudacity_use_portsmf=local \
-	-Daudacity_has_vst3:BOOL=OFF \
-	-DwxWidgets_CONFIG_EXECUTABLE:FILEPATH=%{_bindir}/wx-config-3.2 \
-%ifarch %{x86_64}
-	-Daudacity_use_sbsms=local \
-%endif
-	-Daudacity_use_wxwidgets=system \
-	-G Ninja
-	
-%ninja_build
+%install -a
+desktop-file-install \
+	--add-category="Qt" \
+	--add-category="X-MandrivaLinux-CrossDesktop" \
+	--dir %{buildroot}%{_datadir}/applications \
+	%{buildroot}%{_datadir}/applications/*
 
-%install
-%ninja_install -C build
-
-%find_lang %{name}
-
-rm -f %{buildroot}/usr/%{name}
-
-#clean uneeded installed but not packaged
+# muse_deps may drop rebuilt-dep licenses under /usr/licenses
+rm -rf %{buildroot}/usr/licenses
 rm -rf %{buildroot}%{_docdir}/%{name}
 
-#gw work around bug #52526
-mkdir -p %{buildroot}%{_datadir}/%{name}/help/manual
+# Upstream copies Qt's catalogues next to Audacity's .qm files. Replace
+# those copies with symlinks so a qt6-qttranslations update is picked up.
+for f in %{buildroot}%{_datadir}/%{name}-%{majmin}/locale/qt_*.qm \
+	%{buildroot}%{_datadir}/%{name}-%{majmin}/locale/qtbase_*.qm; do
+	[ -e "$f" ] || continue
+	bn="${f##*/}"
+	rm -f "$f"
+	ln -s %{_qtdir}/translations/"$bn" "$f"
+done
 
-desktop-file-install \
-        --add-category="GTK" \
-        --add-category="X-MandrivaLinux-CrossDesktop" \
-        --dir %{buildroot}%{_datadir}/applications \
-        %{buildroot}%{_datadir}/applications/*
-
-%files -f %{name}.lang
-%doc LICENSE.txt README*
-%{_bindir}/*
-%{_libdir}/%{name}/lib*
-%{_libdir}/audacity/modules/mod*
-%{_datadir}/audacity
-%{_datadir}/applications/%{name}.desktop
-%{_datadir}/icons/hicolor/*/apps/audacity.*
-%{_datadir}/icons/hicolor/*x*/audacity.png
-%{_datadir}/pixmaps/*
-%{_datadir}/metainfo/audacity.appdata.xml
+%files
+%doc LICENSE.txt README.md
+%{_bindir}/audacity
+%{_datadir}/applications/org.audacityteam.Audacity.desktop
+%{_datadir}/metainfo/org.audacityteam.Audacity.appdata.xml
 %{_datadir}/mime/packages/audacity.xml
-%{_mandir}/man1/audacity.1*
+%{_datadir}/icons/hicolor/*/apps/audacity.png
+%{_datadir}/icons/hicolor/512x512/mimetypes/application-x-audacity.png
+%{_datadir}/icons/hicolor/scalable/mimetypes/application-x-audacity.svg
+%{_datadir}/audacity
+%{_datadir}/%{name}-%{majmin}
