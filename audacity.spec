@@ -39,6 +39,7 @@ BuildOption:	-DAU_BUILD_USAGEINFO_MODULE:BOOL=OFF
 BuildOption:	-DAU_USE_SBSMS:BOOL=ON
 BuildOption:	-DAU_USE_SOUNDTOUCH:BOOL=ON
 
+BuildRequires:	git
 BuildRequires:	desktop-file-utils
 # Needed at build time so we can symlink the catalogues the app loads from its locale dir
 BuildRequires:	qt6-qttranslations
