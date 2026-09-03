@@ -93,13 +93,9 @@ BuildRequires:	pkgconfig(xkbcommon)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	lame-devel
 
-# QML modules are loaded at runtime, not via ELF DT_NEEDED
+# QML plugins and image format plugins are loaded at runtime
 Requires:	qt6-qtdeclarative
-Requires:	qt6-qt5compat
-Requires:	qt6-qtsvg
 Requires:	qt6-qtimageformats
-Requires:	qt6-qtshadertools
-Requires:	qt6-qtnetworkauth
 # Symlinked into share/audacity-%%{majmin}/locale (the app does not search the system Qt path)
 Requires:	qt6-qttranslations
 
