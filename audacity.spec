@@ -47,6 +47,9 @@ BuildOption:	-DMUSE_MODULE_UPDATE:BOOL=OFF
 BuildOption:	-DAU_BUILD_USAGEINFO_MODULE:BOOL=OFF
 BuildOption:	-DAU_USE_SBSMS:BOOL=ON
 BuildOption:	-DAU_USE_SOUNDTOUCH:BOOL=ON
+# Qt 6.12 qmlcachegen emits an unqualified Type. That collides with
+# muse enums of the same name once the precompiled header is included.
+BuildOption:	-DQT_QML_NO_CACHEGEN=ON
 
 BuildRequires:	git
 BuildRequires:	desktop-file-utils
