@@ -1,0 +1,14 @@
+diff -up audacity-4.0.2/muse_deps/recipes/libid3tag/meta.cmake.omv~ audacity-4.0.2/muse_deps/recipes/libid3tag/meta.cmake
+--- audacity-4.0.2/muse_deps/recipes/libid3tag/meta.cmake.omv~	2026-11-02 00:00:00.000000000 +0000
++++ audacity-4.0.2/muse_deps/recipes/libid3tag/meta.cmake	2026-11-02 00:00:00.000000000 +0000
+@@ -1,6 +1,9 @@
+ # Audacity's fork only builds static on Windows; keep it static everywhere
+ set(DEP_TARGET libid3tag::libid3tag)
+-set(DEP_LIBS libid3tag)
++# find_library() prepends "lib", so "libid3tag" looks for liblibid3tag.so
++# and misses the system libid3tag.so. The imported target name stays
++# libid3tag::libid3tag.
++set(DEP_LIBS id3tag)
+ set(DEP_STATIC ON)
+ set(DEP_LINK_DEPS zlib::zlib)
+ set(DEP_SYSTEM_HEADER id3tag.h)

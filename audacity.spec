@@ -32,6 +32,8 @@ Patch1:		audacity-4.0.0-desktop-name.patch
 Patch2:		audacity-4.0.0-qt-6.11.patch
 # Header-scope std::string / muse::trc statics crash before main with clang+LTO
 Patch3:		audacity-4.0.0-static-init.patch
+# SYSTEM lookup asks find_library() for "libid3tag", which misses libid3tag.so
+Patch4:		audacity-4.0.2-libid3tag-system.patch
 
 BuildSystem:	cmake
 # Official snapshot ships dependency sources in offline-deps/ (no network at build time)
