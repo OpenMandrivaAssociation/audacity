@@ -14,6 +14,12 @@
 # Official tarball already unpacks as audacity-VERSION/; default %%autosetup -C
 # would nest that as audacity-VERSION/audacity-VERSION/
 %define buildsystem_cmake_prep() %autosetup -p1 -n %{name}-%{version}
+# qmldeps turns imports compiled into this binary into Requires. The
+# Audacity.*, Muse.*, MuseScore.* and KDAB dock modules are linked into
+# audacity itself; the scanner does not always emit the matching Provide
+# (embedded qmldir or qmlRegisterModule), and a few MuseScore framework
+# files are compiled in without those modules. Qt modules stay required.
+%global __requires_exclude ^qml\\((Audacity\\.|Muse\\.|MuseScore\\.|MuseApi\\.|com\\.kdab\\.dockwidgets).*
 
 Summary:	Free Audio Editor With Effects/Analysis Tools
 Name:		audacity
